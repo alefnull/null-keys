@@ -23,10 +23,6 @@ GroupAdd ThisScript, %A_ScriptName%
 	Reload
 return
 #IfWinActive
-
-RAlt & e::Edit ; RIGHT-ALT + E == edit this script in default editor
 ; ===================================
 
-Esc::CapsLock
-+CapsLock::CapsLock
-CapsLock::Esc
+#Include hotkeys.ahk
