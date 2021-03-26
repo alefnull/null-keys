@@ -15,12 +15,17 @@ SetBatchLines -1
 ; auto-reload script on editor save
 ; ===================================
 GroupAdd ThisScript, %A_ScriptName%
-
-#IfWinActive ahk_group ThisScript
-~^s::
+ReloadScript() {
 	TrayTip, reloading updated script, %A_ScriptName%
 	Sleep, 3000
 	Reload
+}
+
+RAlt & r::ReloadScript()
+
+#IfWinActive ahk_group ThisScript
+~^s::
+    ReloadScript()
 return
 #IfWinActive
 ; ===================================
