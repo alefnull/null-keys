@@ -1,7 +1,7 @@
 ﻿; CTRL + WIN + T == tea timer
 ^#t::
 RAlt & t::
-    totalSeconds := 5
+    totalSeconds := 180
     endTime := A_TickCount + (totalSeconds*1000)
     
     Loop
