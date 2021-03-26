@@ -1,14 +1,12 @@
-﻿GroupAdd ThisScript, %A_ScriptName%
-
-ReloadScript() {
-	TrayTip, reloading updated script, %A_ScriptName%
+﻿ReloadScript() {
+    CornerNotify(3, "reloading updated script", "autoexec.ahk", vc hc)
 	Sleep, 3000
 	Reload
 }
 
 RAlt & r::
 CapsLock & r::
-ReloadScript()
+    ReloadScript()
 return
 
 #IfWinActive ahk_group ThisScript
