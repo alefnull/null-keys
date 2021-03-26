@@ -14,6 +14,6 @@ RAlt & t::
             Break
         }
     }
-    
-    MsgBox, 4096, Tea Timer, your tea is (probably) ready!
+    CornerNotify("tea timer", "your tea is ready", "b r", 3)
+    ;MsgBox, 4096, Tea Timer, your tea is (probably) ready!
 return

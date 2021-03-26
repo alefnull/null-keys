@@ -1,5 +1,5 @@
 ﻿ReloadScript() {
-    CornerNotify(3, "reloading updated script", "autoexec.ahk", vc hc)
+    CornerNotify("reloading updated script", "autoexec.ahk", "b r", 3)
 	Sleep, 3000
 	Reload
 }

@@ -13,7 +13,7 @@
 
 ;---------------------------------------------------------------
 
-CornerNotify(secs, title, message, position="b r") {
+CornerNotify(title, message, position="b r", secs=3) {
     CornerNotify_Create(title, message, position)
     millisec := secs*1000*-1
     SetTimer, CornerNotifyBeginFadeOut, %millisec%
@@ -25,15 +25,16 @@ CornerNotify_Create(title, message, position="b r") {
     Gui,+AlwaysOnTop +ToolWindow -SysMenu -Caption +LastFound
     cornernotify_hwnd := WinExist()
     WinSet, ExStyle, +0x20 ; WS_EX_TRANSPARENT make the window transparent-to-mouse
-    WinSet, Transparent, 200
+    WinSet, Transparent, 0
     curtransp := 200
     Gui,Color, 151515 ;background color
-    Gui,Font, cF0F0F0 s17 wbold, Arial
-    Gui,Add, Text, x20 y12 w668 vcornernotify_title, %title%
+    Gui,Font, cFF5050 s18 wbold, CaskaydiaCove NF
+    Gui,Add, Text, w450 Center vcornernotify_title, %title%
     Gui,Font, cF0F0F0 s15 wnorm
-    Gui,Add, Text, x20 y56 w668 vcornernotify_msg, %message%
-    Gui,Show, NoActivate W500
+    Gui,Add, Text, w450 Center vcornernotify_msg, %message%
+    Gui,Show, NoActivate w500
     WinMove(cornernotify_hwnd, position)
+    winfade("ahk_id " cornernotify_hwnd,210,5)
     Return
 }
 
@@ -48,8 +49,10 @@ CornerNotify_ModifyMessage(message) {
 }
 
 CornerNotify_Destroy() {
-    global curtransp
-    curtransp := 0
+    global cornernotify_hwnd
+    ;global curtransp
+    ;curtransp := 0
+    winfade("ahk_id " cornernotify_hwnd,0,5)
     Gui, Destroy
     SetTimer, CornerNotify_FadeOut_Destroy, Off
 }
@@ -85,4 +88,18 @@ WinMove(hwnd,position) {
     WinMove, ahk_id %hwnd%,,x,y
 }
 
-;---------------------------------------------------------------              
+winfade(w:="",t:=128,i:=1,d:=10) {
+    w:=(w="")?("ahk_id " WinActive("A")):w
+    t:=(t>255)?255:(t<0)?0:t
+    WinGet,s,Transparent,%w%
+    s:=(s="")?255:s ;prevent trans unset bug
+    WinSet,Transparent,%s%,%w%
+    i:=(s<t)?abs(i):-1*abs(i)
+    while(k:=(i<0)?(s>t):(s<t)&&WinExist(w)) {
+        WinGet,s,Transparent,%w%
+        s+=i
+        WinSet,Transparent,%s%,%w%
+        sleep %d%
+    }
+}
+;---------------------------------------------------------------

@@ -23,4 +23,3 @@ SetScrollLockState AlwaysOff
 #Include teatimer.ahk
 #Include volumouse.ahk
 #Include warframe.ahk
-
