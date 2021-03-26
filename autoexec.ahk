@@ -26,3 +26,4 @@ return
 ; ===================================
 
 #Include hotkeys.ahk
+#Include teatimer.ahk
