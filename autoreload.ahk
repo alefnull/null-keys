@@ -5,7 +5,6 @@
 }
 
 RAlt & r::
-CapsLock & r::
     ReloadScript()
 return
 

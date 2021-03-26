@@ -4,15 +4,17 @@
 ; (working, but needs more testing)
 ; ==========================
 #IfWinActive Warframe
-CapsLock & XButton1::
+Alt & MButton::
     Send 5
-    Sleep 100
+    Sleep 250
     Send {z down}
-    Sleep 100
+    Sleep 250
     Send {Space}
-    Sleep 100 
+    Sleep 250 
     Send {z up}
-    Sleep 100
+    Sleep 250
     Send 5
+    Sleep 1000
+    Send {WheelDown}
     return
 #If
