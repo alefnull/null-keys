@@ -15,7 +15,8 @@ SetBatchLines -1
 ; script reload on editor save & hotkey
 ; =====================================
 GroupAdd ThisScript, %A_ScriptName%
-ReloadScript() {
+
+ReloadScript() {
 	TrayTip, reloading updated script, %A_ScriptName%
 	Sleep, 3000
 	Reload
