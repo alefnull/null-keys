@@ -11,9 +11,9 @@ SetTitleMatchMode 2
 DetectHiddenWindows On
 SetBatchLines -1
 
-; ===================================
-; auto-reload script on editor save
-; ===================================
+; =====================================
+; script reload on editor save & hotkey
+; =====================================
 GroupAdd ThisScript, %A_ScriptName%
 ReloadScript() {
 	TrayTip, reloading updated script, %A_ScriptName%
@@ -28,7 +28,7 @@ RAlt & r::ReloadScript()
     ReloadScript()
 return
 #IfWinActive
-; ===================================
+; ====================================
 
 #Include hotkeys.ahk
 #Include teatimer.ahk
