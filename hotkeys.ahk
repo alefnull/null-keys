@@ -11,6 +11,11 @@ RAlt & e::
 Edit ; RIGHT-ALT + E == edit this script in default editor
 return
 
+^#Del::
+FileRecycleEmpty
+CornerNotify("recycle bin emptied", "hotkeys.ahk", "b r", 3)
+return
+
 ; vim-like HJKL navigation + 4/0 for home/end
 ;CapsLock & h::Send {Blind}{Left down}
 ;CapsLock & h up::Send {Blind}{Left up}
