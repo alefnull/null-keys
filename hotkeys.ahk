@@ -12,7 +12,7 @@ CapsLock up::
     If key
     Send {Ctrl Up}{Shift Up}{LWin Up}
     else
-        if (A_TimeSincePriorHotkey < 250)
+        if (A_TimeSincePriorHotkey < 225)
         Send, {Esc 2}
 Return
 
