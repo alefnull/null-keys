@@ -1,14 +1,11 @@
 ﻿ReloadScript() {
     CornerNotify("reloading updated script", "autoexec.ahk", "b r", 3)
-	Sleep, 3000
+	Sleep 2000
 	Reload
 }
 
-RAlt & r::
-    ReloadScript()
-return
-
 #IfWinActive ahk_group ThisScript
+~Capslock & s::
 ~^s::
     ReloadScript()
 return

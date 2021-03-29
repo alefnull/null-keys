@@ -1,31 +1,54 @@
-﻿; =========================
-; basic remappings
-; =========================
-CapsLock::Esc
-Esc::CapsLock
+﻿;; use capslock as meta key
+;; if tapped instead of used as modifier, send Esc
+CapsLock::
+    key=
+    Input, key, B C L1 T1, {Esc}
+    if (ErrorLevel = "Max")
+        Send {Ctrl DownTemp}{Shift DownTemp}{LWin DownTemp}%key%
+    KeyWait, CapsLock
+Return
 
-; =========================
-; shortcuts
-; =========================
-RAlt & e::
-Edit ; RIGHT-ALT + E == edit this script in default editor
+CapsLock up::
+    If key
+    Send {Ctrl Up}{Shift Up}{LWin Up}
+    else
+        if (A_TimeSincePriorHotkey < 1000)
+        Send, {Esc 2}
+Return
+
+;; shift + esc to access capslock
+;; if you *really* need it
++Esc::CapsLock
+
+;; vim navigation with hyper
+CapsLock & h:: Send {Left}
+CapsLock & j:: Send {Down}
+CapsLock & k:: Send {Up}
+CapsLock & l:: Send {Right}
+CapsLock & 4:: Send {End}
+CapsLock & 0:: Send {Home}
+
+CapsLock & x:: Send ^{x} ; cut
+CapsLock & c:: Send ^{c} ; copy
+CapsLock & v:: Send ^{v} ; paste
+CapsLock & u:: Send ^{z} ; undo
+CapsLock & y:: Send ^{y} ; redo
+CapsLock & s:: Send ^{s} ; save
+CapsLock & q:: Send !{F4} ; quit
+
+CapsLock & e::
+Edit ; edit this script in default editor
 return
 
-^#Del::
+CapsLock & r::
+ReloadScript()
+return
+
+CapsLock & t::
+Run wt.exe
+return
+
+CapsLock & Del::
 FileRecycleEmpty
 CornerNotify("recycle bin emptied", "hotkeys.ahk", "b r", 3)
 return
-
-; vim-like HJKL navigation + 4/0 for home/end
-;CapsLock & h::Send {Blind}{Left down}
-;CapsLock & h up::Send {Blind}{Left up}
-;CapsLock & j::Send {Blind}{Down down}
-;CapsLock & j up::Send {Blind}{Down up}
-;CapsLock & k::Send {Blind}{Up down}
-;CapsLock & k up::Send {Blind}{Up up}
-;CapsLock & l::Send {Blind}{Right down}
-;CapsLock & l up::Send {Blind}{Right up}
-;CapsLock & 0::Send {Blind}{Home down}
-;CapsLock & 0 up::Send {Blind}{Home up}
-;CapsLock & 4::Send {Blind}{End down}
-;CapsLock & 4 up::Send {Blind}{End up}

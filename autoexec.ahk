@@ -13,9 +13,9 @@ SetBatchLines -1
 
 GroupAdd ThisScript, %A_ScriptName%
 
-SetNumLockState AlwaysOn
-SetCapsLockState AlwaysOff
-SetScrollLockState AlwaysOff
+SetNumLockState, AlwaysOn
+SetCapsLockState, AlwaysOff
+SetScrollLockState, AlwaysOff
 
 #Include lib\CornerNotify.ahk
 #Include autoreload.ahk
