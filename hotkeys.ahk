@@ -12,7 +12,7 @@ CapsLock up::
     If key
     Send {Ctrl Up}{Shift Up}{LWin Up}
     else
-        if (A_TimeSincePriorHotkey < 1000)
+        if (A_TimeSincePriorHotkey < 250)
         Send, {Esc 2}
 Return
 
@@ -35,6 +35,8 @@ CapsLock & u:: Send ^{z} ; undo
 CapsLock & y:: Send ^{y} ; redo
 CapsLock & s:: Send ^{s} ; save
 CapsLock & q:: Send !{F4} ; quit
+
+CapsLock & Backspace:: Send +^{Esc}
 
 CapsLock & e::
 Edit ; edit this script in default editor
