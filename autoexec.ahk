@@ -11,6 +11,10 @@ SetTitleMatchMode 2
 DetectHiddenWindows On
 SetBatchLines -1
 
+TrayTip, script loaded, autoexec.ahk,, 33
+Sleep 3000
+TrayTip ; clear
+
 GroupAdd ThisScript, %A_ScriptName%
 
 SetNumLockState, AlwaysOn
