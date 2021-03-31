@@ -1,26 +1,12 @@
 ﻿;; use capslock as meta key
 ;; if tapped instead of used as modifier, send Esc
-CapsLock::
-    key=
-    Input, key, B C L1 T1, {Esc}
-    if (ErrorLevel = "Max")
-        Send {Ctrl DownTemp}{Shift DownTemp}{LWin DownTemp}%key%
-    KeyWait, CapsLock
-Return
+CapsLock::Esc
 
-CapsLock up::
-    If key
-    Send {Ctrl Up}{Shift Up}{LWin Up}
-    else
-        if (A_TimeSincePriorHotkey < 225)
-        Send, {Esc 2}
-Return
-
-;; shift + esc to access capslock
+;; alt + capslock
 ;; if you *really* need it
-+Esc::CapsLock
+!CapsLock::CapsLock
 
-;; vim navigation with hyper
+;; vim navigation
 CapsLock & h:: Send {Left}
 CapsLock & j:: Send {Down}
 CapsLock & k:: Send {Up}
