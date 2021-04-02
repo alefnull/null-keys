@@ -7,7 +7,7 @@
 #IfWinActive Warframe
 Alt & MButton::
     ; operator form
-    Send 5
+    Send Numpad5
     Sleep 275
     ; void dash
     ; crouch key
@@ -20,7 +20,7 @@ Alt & MButton::
     Send {z up}
     Sleep 275
     ; back to warframe
-    Send 5
+    Send Numpad5
     ; wait a moment then scroll to first ability
     ; this is a personal preference thing
     ; feel free to comment out or delete
