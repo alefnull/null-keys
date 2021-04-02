@@ -15,7 +15,7 @@ openFirefox()
 {
     IfWinExist ahk_class MozillaWindowClass
     {
-        WinActivate, ahk_class MozillaWindowClass
+        WinActivateBottom, ahk_class MozillaWindowClass
     }
     Else
     {

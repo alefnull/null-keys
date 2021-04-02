@@ -28,7 +28,7 @@ CapsLock & d:: openDiscord()
 
 ; firefox not activating
 ; so this is currently useless
-; CapsLock & f:: openFirefox()
+CapsLock & f:: openFirefox()
 
 CapsLock & g:: openGuilded()
 CapsLock & t:: openTerminal()
