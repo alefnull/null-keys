@@ -1,24 +1,24 @@
 ﻿; ==========================
 ; experimental macro:
 ; zenurik energizing dash
-; 250 ms Sleep seems to work inconsistently
+; 275 ms Sleep seems to work inconsistently
 ; still testing
 ; ==========================
 #IfWinActive Warframe
 Alt & MButton::
     ; operator form
     Send 5
-    Sleep 250
+    Sleep 275
     ; void dash
     ; crouch key
     Send {z down}
-    Sleep 250
+    Sleep 275
     ; jump key
     Send {Space}
-    Sleep 250
+    Sleep 275
     ; release crouch key
     Send {z up}
-    Sleep 250
+    Sleep 275
     ; back to warframe
     Send 5
     ; wait a moment then scroll to first ability

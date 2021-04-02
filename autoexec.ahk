@@ -21,7 +21,8 @@ SetNumLockState, AlwaysOn
 SetCapsLockState, AlwaysOff
 SetScrollLockState, AlwaysOff
 
-#Include lib\CornerNotify.ahk
+#Include <CornerNotify>
+#Include funcs.ahk
 #Include autoreload.ahk
 #Include hotkeys.ahk
 #Include teatimer.ahk
