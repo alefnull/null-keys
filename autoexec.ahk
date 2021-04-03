@@ -22,8 +22,7 @@ SetCapsLockState, AlwaysOff
 SetScrollLockState, AlwaysOff
 
 #Include <CornerNotify>
-#Include autoreload.ahk
+#Include funcs.ahk
 #Include hotkeys.ahk
-#Include teatimer.ahk
-#Include volumouse.ahk
-#Include warframe.ahk
+#Include hotstrings.ahk
+#Include misc.ahk

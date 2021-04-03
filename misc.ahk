@@ -1,9 +1,7 @@
-﻿; ==========================
-; experimental macro:
-; zenurik energizing dash
-; 275 ms Sleep seems to work inconsistently
-; still testing
-; ==========================
+﻿;; emoji/emotes
+!/::Send ¯\_(•_•)_/¯
+
+;; warframe - zenurik energizing dash
 #IfWinActive Warframe
 Alt & MButton::
     ; operator form

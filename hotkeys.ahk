@@ -26,11 +26,34 @@ CapsLock & s:: Send ^{s} ; save
 CapsLock & q:: Send !{F4} ; quit
 
 ;; launch or switch to apps (funcs.ahk)
-CapsLock & d:: openDiscord()
-CapsLock & f:: openFirefox()
-CapsLock & g:: openGuilded()
-CapsLock & n:: openNotepad()
-CapsLock & t:: openTerminal()
+CapsLock & d:: discord()
+CapsLock & f:: firefox()
+CapsLock & g:: guilded()
+CapsLock & n:: notepad()
+CapsLock & t:: terminal()
+
+CapsLock & i::
+Run, "C:\Program Files\AutoHotkey\WindowSpy.ahk"
+WinActivate Window Spy
+Return
+
+;; tea timer
+^#t:: TeaTimer(4)
+
+;; adjust volume via mousewheel over tray/taskbar
+#If MouseIsOver("ahk_class Shell_TrayWnd")
+MButton::Send {Volume_Mute}
+WheelUp::Send {Volume_Up 5}
+WheelDown::Send {Volume_Down 5}
+#If
+
+;; auto-reload script on save
+#IfWinActive ahk_group ScriptEdit
+~Capslock & s::
+~^s::
+    ReloadScript()
+return
+#IfWinActive
 
 ;; ueli
 CapsLock & Space:: Send !{Space}
