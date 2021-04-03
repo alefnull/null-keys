@@ -1,15 +1,19 @@
 ﻿#SingleInstance Force
-#Persistent
 #NoEnv
-; #Warn
-#MaxThreadsPerHotkey 1
-SendMode Input
+#Persistent
 SetWorkingDir %A_ScriptDir%
+SendMode Input
+SetBatchLines -1
+FileEncoding UTF-8
+SetTitleMatchMode 2
+#WinActivateForce
+SetWinDelay 0
+SetControlDelay 0
+SetKeyDelay 0
+SetMouseDelay 0
+#Hotstring EndChars \
 #KeyHistory 0
 ListLines Off
-SetTitleMatchMode 2
-DetectHiddenWindows On
-SetBatchLines -1
 
 TrayTip, script loaded, autoexec.ahk,, 33
 Sleep 3000
