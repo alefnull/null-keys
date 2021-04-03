@@ -37,6 +37,19 @@ openGuilded()
     Return
 }
 
+openNotepad()
+{
+    IfWinExist ahk_exe notepad.exe
+    {
+        WinActivate, ahk_exe notepad.exe
+    }
+    Else
+    {
+        Run "C:\Windows\notepad.exe"
+    }
+    Return
+}
+
 openTerminal()
 {
     IfWinExist ahk_exe WindowsTerminal.exe

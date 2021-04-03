@@ -4,7 +4,7 @@
 	Reload
 }
 
-#IfWinActive ahk_group ThisScript
+#IfWinActive ahk_group ScriptEdit
 ~Capslock & s::
 ~^s::
     ReloadScript()

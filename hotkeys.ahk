@@ -1,4 +1,6 @@
-﻿;; use capslock as meta key
+﻿#Include funcs.ahk
+
+;; use capslock as meta key
 ;; if tapped instead of used as modifier, send Esc
 CapsLock::Esc
 
@@ -23,14 +25,11 @@ CapsLock & y:: Send ^{y} ; redo
 CapsLock & s:: Send ^{s} ; save
 CapsLock & q:: Send !{F4} ; quit
 
-;; apps
+;; launch or switch to apps (funcs.ahk)
 CapsLock & d:: openDiscord()
-
-; firefox not activating
-; so this is currently useless
 CapsLock & f:: openFirefox()
-
 CapsLock & g:: openGuilded()
+CapsLock & n:: openNotepad()
 CapsLock & t:: openTerminal()
 
 ;; ueli

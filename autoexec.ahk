@@ -15,14 +15,13 @@ TrayTip, script loaded, autoexec.ahk,, 33
 Sleep 3000
 TrayTip ; clear
 
-GroupAdd ThisScript, %A_ScriptName%
+GroupAdd ScriptEdit, %A_ScriptName%
 
 SetNumLockState, AlwaysOn
 SetCapsLockState, AlwaysOff
 SetScrollLockState, AlwaysOff
 
 #Include <CornerNotify>
-#Include funcs.ahk
 #Include autoreload.ahk
 #Include hotkeys.ahk
 #Include teatimer.ahk
