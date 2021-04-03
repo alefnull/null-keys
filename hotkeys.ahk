@@ -23,7 +23,18 @@ CapsLock & v:: Send ^{v} ; paste
 CapsLock & u:: Send ^{z} ; undo
 CapsLock & y:: Send ^{y} ; redo
 CapsLock & s:: Send ^{s} ; save
-CapsLock & q:: Send !{F4} ; quit
+CapsLock & q::
+If WinActive("ahk_exe WindowsTerminal.exe")
+{
+    Send exit
+    Sleep 100
+    Send {Enter}
+}
+Else
+{
+    Send !{F4} ; quit
+}
+Return
 
 ;; launch or switch to apps (funcs.ahk)
 CapsLock & d:: openDiscord()
