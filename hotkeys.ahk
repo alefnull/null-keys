@@ -36,7 +36,7 @@ WinActivate Window Spy
 Return
 
 ;; tea timer
-CapsLock & 1:: TeaTimer(4)
+^#t:: TeaTimer(4)
 
 ;; adjust volume via mousewheel over tray/taskbar
 #If MouseIsOver("ahk_class Shell_TrayWnd")
