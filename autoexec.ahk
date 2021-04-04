@@ -12,8 +12,7 @@ SetControlDelay 0
 SetKeyDelay 0
 SetMouseDelay 0
 #Hotstring EndChars \
-#KeyHistory 0
-ListLines Off
+#KeyHistory 20
 
 TrayTip, script loaded, autoexec.ahk,, 33
 Sleep 3000

@@ -1,6 +1,4 @@
-﻿#Include funcs.ahk
-
-;; use capslock as meta key
+﻿;; use capslock as meta key
 ;; if tapped instead of used as modifier, send Esc
 CapsLock::Esc
 
@@ -38,7 +36,7 @@ WinActivate Window Spy
 Return
 
 ;; tea timer
-^#t:: TeaTimer(4)
+CapsLock & 1:: TeaTimer(4)
 
 ;; adjust volume via mousewheel over tray/taskbar
 #If MouseIsOver("ahk_class Shell_TrayWnd")
