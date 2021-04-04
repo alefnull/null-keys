@@ -29,10 +29,9 @@ Swapp(WinTitle, Target) {
         if WinActive(WinTitle) {
             WinMinimize
         } else {
-            ; WinActivate, %WinTitle%
-            ; WinGet, hWnd, ID, %WinTitle%
-            ; DllCall("SetForegroundWindow", UInt, hWnd)
-            ; Sleep, 150
+            WinGet, hWnd, ID, %WinTitle%
+            DllCall("SetForegroundWindow", UInt, hWnd)
+            Sleep, 150
             WinGet, WinId, ID, %WinTitle%
             DllCall("SwitchToThisWindow", "UInt", WinId, "UInt", 1)
         }
