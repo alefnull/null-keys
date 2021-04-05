@@ -4,7 +4,8 @@
 }
 
 ReloadScript() {
-    CornerNotify("reloading updated script", "autoexec.ahk", "b r", 3)
+    ;CornerNotify("reloading updated script", "autoexec.ahk", "b r", 3)
+    Notify().AddWindow("  reloading autoexec.ahk  ",{Animate:"Blend",Font:"CaskaydiaCove NF",ShowDelay:1000,Radius:30,Size:22,Time:3000})
 	Sleep 2000
 	Reload
 }
@@ -12,7 +13,8 @@ ReloadScript() {
 TeaTimer(Mins) {
     totalSeconds := Mins * 60
     endTime := A_TickCount + (totalSeconds*1000)
-    CornerNotify("tea timer", "starting tea timer: " . Mins . " min", "b r", 3)
+    ;CornerNotify("tea timer", "starting tea timer: " . Mins . " min", "b r", 3)
+    Notify().AddWindow("  starting tea timer: " . Mins . " min  ",{Animate:"Blend",Font:"CaskaydiaCove NF",ShowDelay:1000,Radius:30,Size:22,Time:3000})
     Loop
     {
         Sleep 1000
@@ -21,7 +23,8 @@ TeaTimer(Mins) {
             Break
         }
     }
-    CornerNotify("tea timer", "your tea is (probably) ready", "b r", 3)
+    ;CornerNotify("tea timer", "your tea is (probably) ready", "b r", 3)
+    Notify().AddWindow("  your tea is (probably) ready  ",{Animate:"Blend",Font:"CaskaydiaCove NF",ShowDelay:1000,Radius:30,Size:22,Time:3000})
 }
 
 Swapp(WinTitle, Target) {

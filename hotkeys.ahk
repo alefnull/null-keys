@@ -6,6 +6,9 @@ CapsLock::Esc
 ;; if you *really* need caps
 !CapsLock::CapsLock
 
+;; Notify() testing
+; CapsLock & Numpad0:: Notify().AddWindow("text",{Animate:"Blend",ShowDelay:500,Radius:40,Size:20,Time:3000})
+
 ;; vim navigation
 CapsLock & h:: Send {Left}
 CapsLock & j:: Send {Down}
@@ -79,5 +82,6 @@ CapsLock & NumpadDot:: Suspend Toggle
 ;; empty recycle bin
 CapsLock & Del::
 FileRecycleEmpty
-CornerNotify("recycle bin emptied", "hotkeys.ahk", "b r", 3)
+Notify().AddWindow("  recycle bin emptied  ",{Animate:"Blend",Font:"CaskaydiaCove NF",ShowDelay:1000,Radius:30,Size:22,Time:3000})
+; CornerNotify("recycle bin emptied", "hotkeys.ahk", "b r", 3)
 return
