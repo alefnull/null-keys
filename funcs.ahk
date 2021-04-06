@@ -1,10 +1,11 @@
 ﻿MouseIsOver(WinTitle) {
-    MouseGetPos,,, Win
+    MouseGetPos ,,,Win
     return WinExist(WinTitle . " ahk_id " . Win)
 }
 
 ReloadScript() {
-    Notify().AddWindow(" reloading autoexec.ahk ")
+    IniWrite 1, %A_ScriptFullPath%, config, reloading
+    Notify().AddWindow(" reloading ahk-scripts ")
     Sleep 2000
     Reload
 }
@@ -29,18 +30,18 @@ Swapp(WinTitle, Target) {
         if WinActive(WinTitle) {
             WinMinimize
         } else {
-            WinGet, hWnd, ID, %WinTitle%
+            WinGet hWnd, ID, %WinTitle%
             DllCall("SetForegroundWindow", UInt, hWnd)
-            Sleep, 150
-            WinGet, WinId, ID, %WinTitle%
+            Sleep 150
+            WinGet WinId, ID, %WinTitle%
             DllCall("SwitchToThisWindow", "UInt", WinId, "UInt", 1)
         }
     } else {
         if (Target = wt.exe) {
-            Run, ^RunAs wt.exe
+            Run *RunAs wt.exe
         } else {
-            Run, %Target%
-            WinWait, %WinTitle%
+            Run %Target%
+            WinWait %WinTitle%
             WinActivate
         }
     }
