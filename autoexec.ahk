@@ -21,7 +21,7 @@ SetCapsLockState, AlwaysOff
 SetScrollLockState, AlwaysOff
 
 #Include <Notify>
-Notify().AddWindow("  ahk-scripts loaded  ",{Animate:"Blend",Radius:30,Time:3000})
+Notify().AddWindow("  ahk-scripts loaded  ")
 #Include funcs.ahk
 #Include hotkeys.ahk
 #Include hotstrings.ahk

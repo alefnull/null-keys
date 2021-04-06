@@ -6,6 +6,9 @@ CapsLock::Esc
 ;; if you *really* need caps
 !CapsLock::CapsLock
 
+;; Notify() testing
+CapsLock & n:: Notify().AddWindow("  testing stuff  ")
+
 ;; vim navigation
 CapsLock & h:: Send {Left}
 CapsLock & j:: Send {Down}
@@ -27,7 +30,7 @@ CapsLock & q:: Send !{F4} ; quit
 CapsLock & d:: discord()
 CapsLock & f:: firefox()
 CapsLock & g:: guilded()
-CapsLock & n:: notepad()
+CapsLock & p:: notepad()
 CapsLock & t:: terminal()
 
 CapsLock & i::

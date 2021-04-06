@@ -32,19 +32,19 @@ Notify:=Notify(20)
 	TitleFont: Face of the title font eg. {TitleFont:"Consolas"}
 	TitleSize: Size of the title text eg. {TitleSize:12}
 */
-Notify(Margin:=5){
+Notify(Margin:=10){
 	static Notify:=New NotifyClass()
 	Notify.Margin:=Margin
 	return Notify
 }
 Class NotifyClass{
 	__New(Margin:=10){
-		this.ShowDelay:=250,this.ID:=0,this.Margin:=Margin,this.Animation:={Bottom:0x00000008,Top:0x00000004,Left:0x00000001,Right:0x00000002,Slide:0x00040000,Center:0x00000010,Blend:0x00080000}
+		this.ShowDelay:=500,this.ID:=0,this.Margin:=Margin,this.Animation:={Bottom:0x00000008,Top:0x00000004,Left:0x00000001,Right:0x00000002,Slide:0x00040000,Center:0x00000010,Blend:0x00080000}
 		if(!this.Init)
 			OnMessage(0x201,NotifyClass.Click.Bind(this)),this.Init:=1
 	}AddWindow(Text,Info:=""){
 		(Info?Info:Info:=[])
-		for a,b in {Background:"0x000000",Color:"0xDDDDDD",TitleColor:"0xDDDDDD",Font:"CaskaydiaCove NF",TitleSize:30,TitleFont:"CaskaydiaCove NF",Size:30,Font:"CaskaydiaCove NF",IconSize:20}
+		for a,b in {Background:"0x000000",Color:"0xDDDDDD",Destroy:"Blend",TitleColor:"0xDDDDDD",Font:"CaskaydiaCove NF",Radius:30,Time:3000,TitleSize:36,TitleFont:"CaskaydiaCove NF",Size:36,Font:"CaskaydiaCove NF",IconSize:20}
 			if(Info[a]="")
 				Info[a]:=b
 		if(!IsObject(Win:=NotifyClass.Windows))
@@ -102,8 +102,8 @@ Class NotifyClass{
 		Obj:=this.SetPos(),Flags:=0
 		for a,b in StrSplit(Info.Animate,",")
 			Flags|=Round(this.Animation[b])
-		DllCall("AnimateWindow","UInt",Main,"Int",(Info.ShowDelay?Info.ShowDelay:this.ShowDelay),"UInt",(Flags?Flags:0x00000008|0x00000004|0x00040000|0x00000002))
-		for a,b in StrSplit((Obj.Destroy?Obj.Destroy:"Top,Left,Slide"),",")
+		DllCall("AnimateWindow","UInt",Main,"Int",(Info.ShowDelay?Info.ShowDelay:this.ShowDelay),"UInt",(Flags?Flags:0x00080000))
+		for a,b in StrSplit((Obj.Destroy?Obj.Destroy:"Blend"),",")
 			Flags|=Round(this.Animation[b])
 		Flags|=0x00010000,NotifyClass.Windows[ID].Flags:=Flags
 		DetectHiddenWindows,%Hidden%
