@@ -39,12 +39,12 @@ Notify(Margin:=5){
 }
 Class NotifyClass{
 	__New(Margin:=10){
-		this.ShowDelay:=1000,this.ID:=0,this.Margin:=Margin,this.Animation:={Bottom:0x00000008,Top:0x00000004,Left:0x00000001,Right:0x00000002,Slide:0x00040000,Center:0x00000010,Blend:0x00080000}
+		this.ShowDelay:=250,this.ID:=0,this.Margin:=Margin,this.Animation:={Bottom:0x00000008,Top:0x00000004,Left:0x00000001,Right:0x00000002,Slide:0x00040000,Center:0x00000010,Blend:0x00080000}
 		if(!this.Init)
 			OnMessage(0x201,NotifyClass.Click.Bind(this)),this.Init:=1
 	}AddWindow(Text,Info:=""){
 		(Info?Info:Info:=[])
-		for a,b in {Background:"0x232323",Color:"0xDDDDDD",TitleColor:"0xDDDDDD",Font:"CaskaydiaCove NF",TitleSize:30,TitleFont:"CaskaydiaCove NF",Size:30,Font:"CaskaydiaCove NF",IconSize:20}
+		for a,b in {Background:"0x000000",Color:"0xDDDDDD",TitleColor:"0xDDDDDD",Font:"CaskaydiaCove NF",TitleSize:30,TitleFont:"CaskaydiaCove NF",Size:30,Font:"CaskaydiaCove NF",IconSize:20}
 			if(Info[a]="")
 				Info[a]:=b
 		if(!IsObject(Win:=NotifyClass.Windows))
