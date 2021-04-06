@@ -4,15 +4,15 @@
 }
 
 ReloadScript() {
-    Notify().AddWindow("  reloading autoexec.ahk  ")
-	Sleep 2000
-	Reload
+    Notify().AddWindow(" reloading autoexec.ahk ")
+    Sleep 2000
+    Reload
 }
 
 TeaTimer(Mins) {
     totalSeconds := Mins * 60
     endTime := A_TickCount + (totalSeconds*1000)
-    Notify().AddWindow("  starting tea timer: " . Mins . " min  ")
+    Notify().AddWindow(" starting tea timer: " . Mins . " min ")
     Loop
     {
         Sleep 1000
@@ -21,7 +21,7 @@ TeaTimer(Mins) {
             Break
         }
     }
-    Notify().AddWindow("  your tea is (probably) ready  ")
+    Notify().AddWindow(" your tea is (probably) ready ")
 }
 
 Swapp(WinTitle, Target) {
