@@ -1,10 +1,26 @@
-# ahk-scripts
+# null-keys
 
-collection of various AutoHotkey scripts
+null-keys is a small cache of AutoHotkey scripts i've either written or collected, and compiled into a personal "universal" script that provides useful conveniences, or just some fun functionality.
 
-in the process of setting up version control for my existing scripts, i mistakenly deleted the entire project. so this repo is now a fresh start to build back to what i had before.
+## Installation / Usage
 
-## usage
+clone or download the repo, and launch autoexec.ahk
 
-- launch 'autoexec.ahk'
-- tweak included scripts as needed
+## Features
+
+- remaps CapsLock to Escape
+- also uses CapsLock as new modifier key (see hotkeys.ahk)
+  - CapsLock + E = edit script in default editor
+  - CapsLock + R = reload script
+  - CapsLock + D/F/G/P/T = launch or switch to apps (see funcs.ahk)
+  - CapsLock + Del = empty recycle bin
+  - ...and more
+- mouse wheel over tray/taskbar adjusts system volume
+- tea timer, with notifications and progress bar!
+- Warframe "Zenurik Energizing Dash" script
+- some fun emoticon hotkeys
+- whatever else i decide to toss in
+
+## Feedback
+
+i'm constantly tinkering with this, and am very keen on improving with AutoHotkey, so i encourage anyone with any suggestions, corrections, or any other type of feedback to drop a line in the Discussions section of this repo. thanks for stopping by!

@@ -14,7 +14,7 @@ ResetConfig() {
 
 ReloadScript() {
     WriteConfig("reloading", 1)
-    Notify().Toast(" reloading script ",{Color:"0xFF4444"})
+    Notify().Toast(" reloading null-keys ",{Color:"0xFF4444"})
     Sleep 2000
     Reload
 }

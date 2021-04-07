@@ -3,8 +3,6 @@
 CapsLock::Esc
 !CapsLock::CapsLock
 
-CapsLock & n::Notify().AddWindow(" testing stuff ")
-
 ;; vim navigation
 CapsLock & h::Send {Left}
 CapsLock & j::Send {Down}
@@ -53,7 +51,7 @@ CapsLock & Right::Send ^#{Right}
 ;; empty recycle bin
 CapsLock & Del::
     FileRecycleEmpty
-    Notify().Toast(" recycle bin emptied ",{Animate:"Blend",Radius:30,Time:3000})
+    Notify().Toast(" recycle bin emptied ")
 return
 
 ;; edit this script in default editor

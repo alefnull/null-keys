@@ -1,3 +1,7 @@
+;; NotifyClass by maestrith
+;; https://github.com/maestrith/Notify
+;; slightly modified by me to provide preferred defaults
+
 #SingleInstance,Force
 Count:=0
 Notify:=Notify(20)
