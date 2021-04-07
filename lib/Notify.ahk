@@ -44,7 +44,7 @@ Class NotifyClass{
 			OnMessage(0x201,NotifyClass.Click.Bind(this)),this.Init:=1
 	}Toast(Text,Info:=""){
 		(Info?Info:Info:=[])
-		for a,b in {Animate:"Blend",Destroy:"Blend",ShowDelay:500,Background:"0x000000",Color:"0xDDDDDD",TitleColor:"0xDDDDDD",Font:"CaskaydiaCove NF",Radius:30,Time:3000,TitleSize:32,TitleFont:"CaskaydiaCove NF",Size:32,Font:"CaskaydiaCove NF",IconSize:20}
+		for a,b in {Animate:"Blend",Destroy:"Blend",ShowDelay:500,Background:"0x000000",Color:"0xDDDDDD",TitleColor:"0xDDDDDD",Font:"CaskaydiaCove NF",Radius:30,Time:3000,TitleSize:30,TitleFont:"CaskaydiaCove NF",Size:30,Font:"CaskaydiaCove NF",IconSize:20}
 			if(Info[a]="")
 				Info[a]:=b
 		if(!IsObject(Win:=NotifyClass.Windows))

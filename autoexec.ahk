@@ -19,7 +19,7 @@ SetScrollLockState AlwaysOff
 #Include <Notify>
 #Include funcs.ahk
 
-DefaultConfig()
+ResetConfig()
 
 isReloading = ReadConfig(reloading)
 If (isReloading) {

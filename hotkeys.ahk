@@ -53,7 +53,7 @@ CapsLock & Right::Send ^#{Right}
 ;; empty recycle bin
 CapsLock & Del::
     FileRecycleEmpty
-    Notify().AddWindow(" recycle bin emptied ",{Animate:"Blend",Radius:30,Time:3000})
+    Notify().Toast(" recycle bin emptied ",{Animate:"Blend",Radius:30,Time:3000})
 return
 
 ;; edit this script in default editor
@@ -72,6 +72,3 @@ return
     ReloadScript()
 return
 #IfWinActive
-
-;; suspend script on/off
-CapsLock & NumpadDot::Suspend Toggle

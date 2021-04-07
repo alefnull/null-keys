@@ -7,7 +7,7 @@ WriteConfig(key, value) {
     IniWrite %value%, %A_ScriptFullPath%, config, %key%
 }
 
-DefaultConfig() {
+ResetConfig() {
     IniWrite 0, %A_ScriptFullPath%, config, brewing
     IniWrite 0, %A_ScriptFullPath%, config, canceled
 }
@@ -41,7 +41,7 @@ TeaTimer(mins) {
         Gui New,hwndTeaTimer
         Gui +E0x20 -Caption +AlwaysOnTop +Owner +LastFound
         WinSet Transparent, 150
-        Gui Color, FF00FF
+        Gui Color, FFFFFF
         While (A_TickCount <= endTime) {
             isCanceled := ReadConfig("canceled")
             if (isCanceled = 1) {
@@ -52,7 +52,7 @@ TeaTimer(mins) {
                 Goto break_outer
             }
             width := A_ScreenWidth * (1 - (endTime - A_TickCount)/milli)
-            Gui, Show, x0 y0 w%width% h25 NA
+            Gui, Show, x0 y0 w%width% h15 NA
             Sleep 20
         }
         Gui Destroy
