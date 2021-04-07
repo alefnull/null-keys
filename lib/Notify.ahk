@@ -4,7 +4,7 @@ Notify:=Notify(20)
 /*
 	Usage:
 	Notify:=Notify()
-	Window:=Notify.AddWindow("Your Text Here",{Icon:4,Background:"0xAA00AA"})
+	Window:=Notify.Toast("Your Text Here",{Icon:4,Background:"0xAA00AA"})
 	|---Window ID                                          |--------Options
 	Options:
 	
@@ -42,9 +42,9 @@ Class NotifyClass{
 		this.ShowDelay:=500,this.ID:=0,this.Margin:=Margin,this.Animation:={Bottom:0x00000008,Top:0x00000004,Left:0x00000001,Right:0x00000002,Slide:0x00040000,Center:0x00000010,Blend:0x00080000}
 		if(!this.Init)
 			OnMessage(0x201,NotifyClass.Click.Bind(this)),this.Init:=1
-	}AddWindow(Text,Info:=""){
+	}Toast(Text,Info:=""){
 		(Info?Info:Info:=[])
-		for a,b in {Animate:"Blend",Destroy:"Blend",ShowDelay:500,Background:"0x000000",Color:"0xDDDDDD",TitleColor:"0xDDDDDD",Font:"CaskaydiaCove NF",Radius:30,Time:3000,TitleSize:36,TitleFont:"CaskaydiaCove NF",Size:36,Font:"CaskaydiaCove NF",IconSize:20}
+		for a,b in {Animate:"Blend",Destroy:"Blend",ShowDelay:500,Background:"0x000000",Color:"0xDDDDDD",TitleColor:"0xDDDDDD",Font:"CaskaydiaCove NF",Radius:30,Time:3000,TitleSize:32,TitleFont:"CaskaydiaCove NF",Size:32,Font:"CaskaydiaCove NF",IconSize:20}
 			if(Info[a]="")
 				Info[a]:=b
 		if(!IsObject(Win:=NotifyClass.Windows))

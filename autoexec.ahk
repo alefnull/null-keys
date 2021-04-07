@@ -1,11 +1,13 @@
 ﻿#SingleInstance Force
 #NoEnv
 #Persistent
+#MaxThreadsPerHotkey 1
 SetWorkingDir %A_ScriptDir%
 SendMode Input
 SetBatchLines -1
 FileEncoding UTF-8
 SetTitleMatchMode 2
+ListLines Off
 #KeyHistory 20
 
 GroupAdd ScriptEdit, %A_ScriptName%
@@ -15,25 +17,22 @@ SetCapsLockState AlwaysOff
 SetScrollLockState AlwaysOff
 
 #Include <Notify>
-IniRead isReloading, %A_ScriptFullPath%, config, reloading
-If (isReloading) {
-    IniWrite 0, %A_ScriptFullPath%, config, reloading
-    Notify().AddWindow(" ahk-scripts reloaded ")
-} else {
-    Notify().AddWindow(" ahk-scripts loaded ")
-}
 #Include funcs.ahk
+
+isReloading = ReadConfig(reloading)
+If (isReloading) {
+    WriteConfig("reloading", 0)
+    Notify().Toast(" script reloaded ",{Color:"0x44FF44"})
+} else {
+    Notify().Toast(" script loaded ",{Color:"0x44FF44"})
+}
+
 #Include hotkeys.ahk
 #Include hotstrings.ahk
 #Include misc.ahk
 
 
-/*  -- config section
-
+/* --- BEGIN CONFIG ---
 [config]
 reloading=0
-
-;; IniRead value, %A_ScriptFullPath%, section, key
-;; IniWrite value, %A_ScriptFullPath%, section, key
-
-*/  ;-- end config section
+--- END CONFIG --- */

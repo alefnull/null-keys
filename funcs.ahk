@@ -1,11 +1,15 @@
-﻿MouseIsOver(WinTitle) {
-    MouseGetPos ,,,Win
-    return WinExist(WinTitle . " ahk_id " . Win)
+﻿ReadConfig(key) {
+    IniRead value, %A_ScriptFullPath%, config, %key%
+    return %value%
+}
+
+WriteConfig(key, value) {
+    IniWrite %value%, %A_ScriptFullPath%, config, %key%
 }
 
 ReloadScript() {
-    IniWrite 1, %A_ScriptFullPath%, config, reloading
-    Notify().AddWindow(" reloading ahk-scripts ")
+    WriteConfig("reloading", 1)
+    Notify().Toast(" reloading script ",{Color:"0xFF4444"})
     Sleep 2000
     Reload
 }
@@ -13,7 +17,7 @@ ReloadScript() {
 TeaTimer(Mins) {
     totalSeconds := Mins * 60
     endTime := A_TickCount + (totalSeconds*1000)
-    Notify().AddWindow(" starting tea timer: " . Mins . " min ")
+    Notify().Toast(" starting tea timer: " . Mins . " min ",{Color:"0xFF44FF"})
     Loop
     {
         Sleep 1000
@@ -22,7 +26,12 @@ TeaTimer(Mins) {
             Break
         }
     }
-    Notify().AddWindow(" your tea is (probably) ready ")
+    Notify().Toast(" your tea is (probably) ready ",{Color:"0xFF44FF"})
+}
+
+MouseIsOver(WinTitle) {
+    MouseGetPos ,,,Win
+    return WinExist(WinTitle . " ahk_id " . Win)
 }
 
 Swapp(WinTitle, Target) {

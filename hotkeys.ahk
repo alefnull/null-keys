@@ -10,16 +10,12 @@ CapsLock & h::Send {Left}
 CapsLock & j::Send {Down}
 CapsLock & k::Send {Up}
 CapsLock & l::Send {Right}
-CapsLock & 4::Send {End}
-CapsLock & 0::Send {Home}
+CapsLock & 0::Send {End}
+CapsLock & 9::Send {Home}
 
 ;; normal useful commands
-CapsLock & x::Send ^{x} ; cut
-CapsLock & c::Send ^{c} ; copy
-CapsLock & v::Send ^{v} ; paste
 CapsLock & u::Send ^{z} ; undo
 CapsLock & y::Send ^{y} ; redo
-CapsLock & s::Send ^{s} ; save
 CapsLock & q::Send !{F4} ; quit
 
 ;; launch or switch to apps (funcs.ahk)
@@ -35,22 +31,14 @@ CapsLock & i::
 Return
 
 ;; tea timer
-^#t::TeaTimer(4)
+CapsLock & '::TeaTimer(3)
 
 ;; adjust volume via mousewheel over tray/taskbar
 #If MouseIsOver("ahk_class Shell_TrayWnd")
     MButton::Send {Volume_Mute}
-WheelUp::Send {Volume_Up 5}
-WheelDown::Send {Volume_Down 5}
+    WheelUp::Send {Volume_Up 5}
+    WheelDown::Send {Volume_Down 5}
 #If
-
-;; auto-reload script on save
-#IfWinActive ahk_group ScriptEdit
-~Capslock & s::
-~^s::
-    ReloadScript()
-return
-#IfWinActive
 
 ;; ueli
 CapsLock & Space::Send !{Space}
@@ -62,6 +50,12 @@ CapsLock & Backspace::Send +^{Esc}
 CapsLock & Left::Send ^#{Left}
 CapsLock & Right::Send ^#{Right}
 
+;; empty recycle bin
+CapsLock & Del::
+    FileRecycleEmpty
+    Notify().AddWindow(" recycle bin emptied ",{Animate:"Blend",Radius:30,Time:3000})
+return
+
 ;; edit this script in default editor
 CapsLock & e::
     Edit
@@ -72,11 +66,12 @@ CapsLock & r::
     ReloadScript()
 return
 
+;; auto-reload script on save
+#IfWinActive ahk_group ScriptEdit
+~^s::
+    ReloadScript()
+return
+#IfWinActive
+
 ;; suspend script on/off
 CapsLock & NumpadDot::Suspend Toggle
-
-;; empty recycle bin
-CapsLock & Del::
-    FileRecycleEmpty
-    Notify().AddWindow(" recycle bin emptied ",{Animate:"Blend",Radius:30,Time:3000})
-return
