@@ -1,7 +1,7 @@
 ﻿#SingleInstance Force
 #NoEnv
 #Persistent
-#MaxThreadsPerHotkey 1
+#MaxThreadsPerHotkey 20
 SetWorkingDir %A_ScriptDir%
 SendMode Input
 SetBatchLines -1
@@ -19,6 +19,8 @@ SetScrollLockState AlwaysOff
 #Include <Notify>
 #Include funcs.ahk
 
+DefaultConfig()
+
 isReloading = ReadConfig(reloading)
 If (isReloading) {
     WriteConfig("reloading", 0)
@@ -35,4 +37,6 @@ If (isReloading) {
 /* --- BEGIN CONFIG ---
 [config]
 reloading=0
+brewing=0
+canceled=0
 --- END CONFIG --- */
