@@ -4,7 +4,7 @@ null-keys is a small cache of AutoHotkey scripts i've either written or collecte
 
 ## Installation / Usage
 
-clone or download the repo, and launch autoexec.ahk
+clone or download the repo, and launch null-keys.ahk
 
 ## Features
 
