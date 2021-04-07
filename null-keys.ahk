@@ -22,7 +22,7 @@ SetScrollLockState AlwaysOff
 ResetConfig()
 
 isReloading = ReadConfig(reloading)
-If (isReloading) {
+If (isReloading = 1) {
     WriteConfig("reloading", 0)
     Notify().Toast(" null-keys reloaded ",{Color:"0x44FF44"})
 } else {

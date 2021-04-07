@@ -15,6 +15,7 @@ clone or download the repo, and launch null-keys.ahk
   - CapsLock + D/F/G/P/T = launch or switch to apps (see funcs.ahk)
   - CapsLock + Del = empty recycle bin
   - ...and more
+- when editing script in any(?) editor, Ctrl+S to save will automagically reload script!
 - mouse wheel over tray/taskbar adjusts system volume
 - tea timer, with notifications and progress bar!
 - Warframe "Zenurik Energizing Dash" script
