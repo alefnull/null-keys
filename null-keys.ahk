@@ -1,4 +1,5 @@
 ﻿#SingleInstance Force
+;#Warn
 #NoEnv
 #Persistent
 #MaxThreadsPerHotkey 20
@@ -19,20 +20,21 @@ SetScrollLockState AlwaysOff
 #Include <Notify>
 #Include funcs.ahk
 
-ResetConfig()
-
 isReloading := ReadConfig("reloading")
-If (isReloading = 1) {
-    WriteConfig("reloading", 0)
-    Notify().Toast(" null-keys reloaded ",{Color:"0x44FF44"})
+If (isReloading) {
+    WriteConfig("reloading", false)
+    sleep 750
+    Notify().Toast(" null-keys reloaded ")
 } else {
-    Notify().Toast(" null-keys loaded ",{Color:"0x44FF44"})
+    Notify().Toast(" null-keys loaded ")
 }
+
+InitConfig()
+ResetConfig()
 
 #Include hotkeys.ahk
 #Include hotstrings.ahk
 #Include misc.ahk
-
 
 /* --- BEGIN CONFIG ---
 [config]

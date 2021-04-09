@@ -1,4 +1,16 @@
-﻿ReadConfig(key) {
+﻿CheckConfig() {
+    FileRead, thisScript, %A_ScriptFullPath%
+    found := InStr(thisScript, "[config]")
+    return found = 0 ? false : true
+}
+
+InitConfig() {
+    cfgExists := CheckConfig()
+    if (!cfgExists)
+        FileAppend `n/* --- BEGIN CONFIG ---`n[config]`nreloading=0`n--- END CONFIG --- */`n, %A_ScriptFullPath%
+}
+
+ReadConfig(key) {
     IniRead value, %A_ScriptFullPath%, config, %key%
     return %value%
 }
@@ -13,9 +25,8 @@ ResetConfig() {
 }
 
 ReloadScript() {
-    WriteConfig("reloading", 1)
-    Notify().Toast(" reloading null-keys ",{Color:"0xFF4444"})
-    Sleep 2000
+    WriteConfig("reloading", true)
+    Sleep 750
     Reload
 }
 

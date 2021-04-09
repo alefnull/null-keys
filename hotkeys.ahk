@@ -67,6 +67,7 @@ return
 ;; auto-reload script on save
 #IfWinActive ahk_group ScriptEdit
 ~^s::
+    sleep 1000
     ReloadScript()
 return
 #IfWinActive
