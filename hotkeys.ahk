@@ -71,3 +71,7 @@ return
     ReloadScript()
 return
 #IfWinActive
+
+#IfWinActive ueli
+Space::Enter
+#IfWinActive

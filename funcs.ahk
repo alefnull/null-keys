@@ -44,7 +44,7 @@ GuiDestroyAll(){
 TeaTimer(mins) {
     totalSeconds := mins * 60
     milli := totalSeconds * 1000
-    endTime := A_TickCount + (totalSeconds*1000)
+    endTime := A_TickCount + (milli)
     isBrewing := ReadConfig("brewing")
     if (isBrewing = 0) {
         WriteConfig("brewing", 1)

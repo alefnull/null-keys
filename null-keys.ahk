@@ -36,9 +36,9 @@ ResetConfig()
 #Include hotstrings.ahk
 #Include misc.ahk
 
-/* --- BEGIN CONFIG ---
+/*
 [config]
 reloading=0
 brewing=0
 canceled=0
---- END CONFIG --- */
+*/
