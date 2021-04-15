@@ -23,6 +23,9 @@ CapsLock & g::guilded()
 CapsLock & p::notepad()
 CapsLock & t::terminal()
 
+;; snap active window to FancyZones zone
+CapsLock & w::Send #{Right}
+
 CapsLock & i::
     Run "C:\Program Files\AutoHotkey\WindowSpy.ahk"
     WinActivate Window Spy
