@@ -1,9 +1,9 @@
 ﻿;; use capslock as meta key / escape
-;; alt + capslock if you *really* need it
+;; RAlt + capslock if you *really* need it
 CapsLock::Esc
-!CapsLock::CapsLock
+RAlt & CapsLock::CapsLock
 
-;; vim navigation
+;; vim-like navigation
 CapsLock & h::Send {Left}
 CapsLock & j::Send {Down}
 CapsLock & k::Send {Up}
@@ -17,7 +17,7 @@ CapsLock & y::Send ^{y} ; redo
 CapsLock & q::
     if !(WinActive("ahk_class Progman") || WinActive("ahk_class Shell_TrayWnd"))
     {
-        Send !{F4} ; quit
+        Send !{F4} ; quit program if not explorer
     }
 Return
 
@@ -28,9 +28,16 @@ CapsLock & g::Guilded()
 CapsLock & p::Notepad()
 CapsLock & t::Terminal()
 
+;; emoji/emotes
+CapsLock & /::Send ¯\_(●_●)_/¯ ;; shrug ¯\_(●_●)_/¯
+CapsLock & [::Send (●_●) ;; face neutral (●_●)
+CapsLock & ]::Send (●_◉) ;; face raised eyebrow (●_◉)
+CapsLock & \::Send (ノ●_●)ノ︵┻━┻ ;; table flip (ノ●_●)ノ︵┻━┻
+
 ;; snap active window to FancyZones zone
 CapsLock & w::Send #{Right}
 
+;; window spy
 CapsLock & i::
     Run "C:\Program Files\AutoHotkey\WindowSpy.ahk"
     WinActivate Window Spy
@@ -80,6 +87,33 @@ return
 return
 #IfWinActive
 
+;; use Space as Enter in ueli
 #IfWinActive ueli
 Space::Enter
 #IfWinActive
+
+;; warframe - zenurik energizing dash
+#IfWinActive Warframe
+    CapsLock & MButton::
+        ; operator form
+        Send {Numpad5}
+        Sleep 275
+        ; void dash
+        ; crouch key
+        Send {z down}
+        Sleep 275
+        ; jump key
+        Send {Space}
+        Sleep 275
+        ; release crouch key
+        Send {z up}
+        Sleep 275
+        ; back to warframe
+        Send {Numpad5}
+        ; wait a moment then scroll to first ability
+        ; this is a personal preference thing
+        ; feel free to comment out or delete
+        Sleep 750
+        Send {WheelDown}
+    return
+#If

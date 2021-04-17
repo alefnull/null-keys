@@ -37,7 +37,6 @@ ResetConfig()
 
 #Include hotkeys.ahk
 #Include hotstrings.ahk
-#Include misc.ahk
 
 /*
 [config]
