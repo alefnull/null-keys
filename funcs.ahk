@@ -9,7 +9,9 @@ InitConfig()
 {
     cfg_exists := CheckConfig()
     if (!cfg_exists)
+    {
         FileAppend `n/* --- BEGIN CONFIG ---`n[config]`nreloading=0`n--- END CONFIG --- */`n, %A_ScriptFullPath%
+    }
 }
 
 ReadConfig(key)
@@ -38,14 +40,16 @@ ReloadScript()
 
 GuiDestroyAll()
 {
-   dhw_setting := A_DetectHiddenWindows
-   DetectHiddenWindows On
-   PID := DllCall("GetCurrentProcessId", "UInt")
-   WinGet, gui_list, List, ahk_class AutoHotkeyGUI ahk_pid %PID%
-   Loop, %gui_list%
-      Gui % gui_list%A_Index% . ":Destroy"
-   DetectHiddenWindows, %dhw_setting%
-   return gui_list
+    dhw_setting := A_DetectHiddenWindows
+    DetectHiddenWindows On
+    PID := DllCall("GetCurrentProcessId", "UInt")
+    WinGet, gui_list, List, ahk_class AutoHotkeyGUI ahk_pid %PID%
+    Loop, %gui_list%
+    {
+        Gui % gui_list%A_Index% . ":Destroy"
+    }
+    DetectHiddenWindows, %dhw_setting%
+    return gui_list
 }
 
 TeaTimer(mins)
