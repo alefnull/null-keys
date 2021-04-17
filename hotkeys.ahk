@@ -14,7 +14,12 @@ CapsLock & 9::Send {Home}
 ;; normal useful commands
 CapsLock & u::Send ^{z} ; undo
 CapsLock & y::Send ^{y} ; redo
-CapsLock & q::Send !{F4} ; quit
+CapsLock & q::
+    if !(WinActive("ahk_class Progman") || WinActive("ahk_class Shell_TrayWnd"))
+    {
+        Send !{F4} ; quit
+    }
+Return
 
 ;; launch or switch to apps (funcs.ahk)
 CapsLock & d::Discord()
