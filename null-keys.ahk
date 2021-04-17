@@ -11,7 +11,7 @@ SetTitleMatchMode 2
 ListLines Off
 #KeyHistory 20
 
-GroupAdd ScriptEdit, %A_ScriptName%
+GroupAdd SCRIPT_EDIT, %A_ScriptName%
 
 SetNumLockState AlwaysOn
 SetCapsLockState AlwaysOff
@@ -20,12 +20,15 @@ SetScrollLockState AlwaysOff
 #Include <Notify>
 #Include funcs.ahk
 
-isReloading := ReadConfig("reloading")
-If (isReloading) {
+is_reloading := ReadConfig("reloading")
+If (is_reloading)
+{
     WriteConfig("reloading", false)
     sleep 750
     Notify().Toast(" null-keys reloaded ")
-} else {
+}
+else
+{
     Notify().Toast(" null-keys loaded ")
 }
 

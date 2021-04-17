@@ -1,133 +1,162 @@
-﻿CheckConfig() {
-    FileRead, thisScript, %A_ScriptFullPath%
-    found := InStr(thisScript, "[config]")
+﻿CheckConfig()
+{
+    FileRead, this_script, %A_ScriptFullPath%
+    found := InStr(this_script, "[config]")
     return found = 0 ? false : true
 }
 
-InitConfig() {
-    cfgExists := CheckConfig()
-    if (!cfgExists)
+InitConfig()
+{
+    cfg_exists := CheckConfig()
+    if (!cfg_exists)
         FileAppend `n/* --- BEGIN CONFIG ---`n[config]`nreloading=0`n--- END CONFIG --- */`n, %A_ScriptFullPath%
 }
 
-ReadConfig(key) {
+ReadConfig(key)
+{
     IniRead value, %A_ScriptFullPath%, config, %key%
     return %value%
 }
 
-WriteConfig(key, value) {
+WriteConfig(key, value)
+{
     IniWrite %value%, %A_ScriptFullPath%, config, %key%
 }
 
-ResetConfig() {
+ResetConfig()
+{
     IniWrite 0, %A_ScriptFullPath%, config, brewing
     IniWrite 0, %A_ScriptFullPath%, config, canceled
 }
 
-ReloadScript() {
+ReloadScript()
+{
     WriteConfig("reloading", true)
     Sleep 750
     Reload
 }
 
-GuiDestroyAll(){
-   dhwSetting := A_DetectHiddenWindows
+GuiDestroyAll()
+{
+   dhw_setting := A_DetectHiddenWindows
    DetectHiddenWindows On
    PID := DllCall("GetCurrentProcessId", "UInt")
-   WinGet, guiList, List, ahk_class AutoHotkeyGUI ahk_pid %PID%
-   Loop, %guiList%
-      Gui % guiList%A_Index% . ":Destroy"
-   DetectHiddenWindows, %dhwSetting%
-   return guiList
+   WinGet, gui_list, List, ahk_class AutoHotkeyGUI ahk_pid %PID%
+   Loop, %gui_list%
+      Gui % gui_list%A_Index% . ":Destroy"
+   DetectHiddenWindows, %dhw_setting%
+   return gui_list
 }
 
-TeaTimer(mins) {
-    totalSeconds := mins * 60
-    milli := totalSeconds * 1000
-    endTime := A_TickCount + (milli)
-    isBrewing := ReadConfig("brewing")
-    if (isBrewing = 0) {
+TeaTimer(mins)
+{
+    total_seconds := mins * 60
+    millis := total_seconds * 1000
+    end_tick := A_TickCount + (millis)
+    is_brewing := ReadConfig("brewing")
+    if (is_brewing = 0)
+    {
         WriteConfig("brewing", 1)
         Notify().Toast(" starting tea timer: " . mins . " min ",{Color:"0xFF44FF"})
         Gui New,hwndTeaTimer
         Gui +E0x20 -Caption +AlwaysOnTop +Owner +LastFound
         WinSet Transparent, 150
         Gui Color, FFFFFF
-        While (A_TickCount <= endTime) {
-            isCanceled := ReadConfig("canceled")
-            if (isCanceled = 1) {
+        While (A_TickCount <= end_tick)
+        {
+            is_canceled := ReadConfig("canceled")
+            if (is_canceled = 1)
+            {
                 WriteConfig("brewing", 0)
                 WriteConfig("canceled", 0)
                 GuiDestroyAll()
                 Notify().Toast(" why would you cancel a tea timer? ",{Color:"0xFF44FF"})
                 Goto break_outer
             }
-            width := A_ScreenWidth * (1 - (endTime - A_TickCount)/milli)
+            width := A_ScreenWidth * (1 - (end_tick - A_TickCount)/millis)
             Gui, Show, x0 y0 w%width% h15 NA
             Sleep 20
         }
         Gui Destroy
         WriteConfig("brewing", 0)
         Notify().Toast(" your tea is (probably) ready ",{Color:"0xFF44FF"})
-    } else {
+    }
+    else
+    {
         WriteConfig("canceled", 1)
     }
     break_outer:
 }
 
-MouseIsOver(WinTitle) {
-    MouseGetPos ,,,Win
-    return WinExist(WinTitle . " ahk_id " . Win)
+MouseIsOver(win_title)
+{
+    MouseGetPos ,,,win
+    return WinExist(win_title . " ahk_id " . win)
 }
 
-Swapp(WinTitle, Target) {
-    if WinExist(WinTitle) {
-        if WinActive(WinTitle) {
+Swapp(win_title, target_exe)
+{
+    if WinExist(win_title)
+    {
+        if WinActive(win_title)
+        {
             WinMinimize
-        } else {
-            WinGet hWnd, ID, %WinTitle%
+        }
+        else
+        {
+            WinGet hWnd, ID, %win_title%
             DllCall("SetForegroundWindow", UInt, hWnd)
             Sleep 150
-            WinGet WinId, ID, %WinTitle%
+            WinGet WinId, ID, %win_title%
             DllCall("SwitchToThisWindow", "UInt", WinId, "UInt", 1)
         }
-    } else {
-        if (Target = wt.exe) {
+    }
+    else
+    {
+        if (target_exe = wt.exe)
+        {
             Run *RunAs wt.exe
-        } else {
-            Run %Target%
-            WinWait %WinTitle%
+        }
+        else
+        {
+            Run %target_exe%
+            WinWait %win_title%
             WinActivate
         }
     }
 }
 
-discord() {
-    WinTitle = Discord ahk_class Chrome_WidgetWin_1
-    Target = "C:\Users\alefnull\AppData\Local\Discord\app-0.0.309\Discord.exe"
-    Swapp(WinTitle, Target)
+Discord()
+{
+    win_title = Discord ahk_class Chrome_WidgetWin_1
+    target_exe = "C:\Users\alefnull\AppData\Local\Discord\app-0.0.309\Discord.exe"
+    Swapp(win_title, target_exe)
 }
 
-guilded() {
-    WinTitle = Guilded ahk_class Chrome_WidgetWin_1
-    Target = "C:\Users\alefnull\AppData\Local\Programs\Guilded\Guilded.exe"
-    Swapp(WinTitle, Target)
+Guilded()
+{
+    win_title = Guilded ahk_class Chrome_WidgetWin_1
+    target_exe = "C:\Users\alefnull\AppData\Local\Programs\Guilded\Guilded.exe"
+    Swapp(win_title, target_exe)
 }
 
-firefox() {
-    WinTitle = Firefox ahk_class MozillaWindowClass
-    Target = "C:\Program Files\Mozilla Firefox\firefox.exe"
-    Swapp(WinTitle, Target)
+Firefox()
+{
+    win_title = Firefox ahk_class MozillaWindowClass
+    target_exe = "C:\Program Files\Mozilla Firefox\firefox.exe"
+    Swapp(win_title, target_exe)
 }
 
-notepad() {
-    WinTitle = Notepad ahk_class Notepad
-    Target = "C:\Windows\notepad.exe"
-    Swapp(WinTitle, Target)
+Notepad()
+{
+    win_title = Notepad ahk_class Notepad
+    target_exe = "C:\Windows\notepad.exe"
+    Swapp(win_title, target_exe)
 }
 
-terminal() {
-    WinTitle = ahk_exe WindowsTerminal.exe ahk_class CASCADIA_HOSTING_WINDOW_CLASS
-    Target = wt.exe
-    Swapp(WinTitle, Target)
+Terminal()
+{
+    win_title = ahk_exe WindowsTerminal.exe ahk_class CASCADIA_HOSTING_WINDOW_CLASS
+    target_exe = wt.exe
+    Swapp(win_title, target_exe)
 }

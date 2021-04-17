@@ -17,11 +17,11 @@ CapsLock & y::Send ^{y} ; redo
 CapsLock & q::Send !{F4} ; quit
 
 ;; launch or switch to apps (funcs.ahk)
-CapsLock & d::discord()
-CapsLock & f::firefox()
-CapsLock & g::guilded()
-CapsLock & p::notepad()
-CapsLock & t::terminal()
+CapsLock & d::Discord()
+CapsLock & f::Firefox()
+CapsLock & g::Guilded()
+CapsLock & p::Notepad()
+CapsLock & t::Terminal()
 
 ;; snap active window to FancyZones zone
 CapsLock & w::Send #{Right}
@@ -68,7 +68,7 @@ CapsLock & r::
 return
 
 ;; auto-reload script on save
-#IfWinActive ahk_group ScriptEdit
+#IfWinActive ahk_group SCRIPT_EDIT
 ~^s::
     sleep 1000
     ReloadScript()

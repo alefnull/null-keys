@@ -1,8 +1,8 @@
 ﻿;; emoji/emotes
-!/::Send {U+00AF}\_({U+25CF}{U+005F}{U+25CF})_/{U+00AF} ;; shrug
-![::Send ({U+25CF}{U+005F}{U+25CF}) ;; face neutral
-!]::Send ({U+25CF}{U+005F}{U+25C9}) ;; face raised eyebrow
-!\::Send (ノ{U+25CF}{U+005F}{U+25CF})ノ︵┻━┻
+!/::Send ¯\_(●_●)_/¯ ;; shrug ¯\_(●_●)_/¯
+![::Send (●_●) ;; face neutral (●_●)
+!]::Send (●_◉) ;; face raised eyebrow (●_◉)
+!\::Send (ノ●_●)ノ︵┻━┻ ;; table flip (ノ●_●)ノ︵┻━┻
 
 ;; warframe - zenurik energizing dash
 #IfWinActive Warframe
