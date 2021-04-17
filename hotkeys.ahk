@@ -12,12 +12,13 @@ CapsLock & 0::Send {End}
 CapsLock & 9::Send {Home}
 
 ;; normal useful commands
-CapsLock & u::Send ^{z} ; undo
-CapsLock & y::Send ^{y} ; redo
+CapsLock & Backspace::Send {Del} ;; delete
+CapsLock & u::Send ^{z} ;; undo
+CapsLock & y::Send ^{y} ;; redo
 CapsLock & q::
     if !(WinActive("ahk_class Progman") || WinActive("ahk_class Shell_TrayWnd"))
     {
-        Send !{F4} ; quit program if not explorer
+        Send !{F4} ;; quit program if not explorer
     }
 Return
 
@@ -57,7 +58,7 @@ CapsLock & '::TeaTimer(3)
 CapsLock & Space::Send !{Space}
 
 ;; task manager
-CapsLock & Backspace::Send +^{Esc}
+CapsLock & Enter::Send +^{Esc}
 
 ;; virtual desktop left & right
 CapsLock & Left::Send ^#{Left}
@@ -95,24 +96,24 @@ Space::Enter
 ;; warframe - zenurik energizing dash
 #IfWinActive Warframe
     CapsLock & MButton::
-        ; operator form
+        ;; operator form
         Send {Numpad5}
         Sleep 275
-        ; void dash
-        ; crouch key
+        ;; void dash
+        ;; crouch key
         Send {z down}
         Sleep 275
-        ; jump key
+        ;; jump key
         Send {Space}
         Sleep 275
-        ; release crouch key
+        ;; release crouch key
         Send {z up}
         Sleep 275
-        ; back to warframe
+        ;; back to warframe
         Send {Numpad5}
-        ; wait a moment then scroll to first ability
-        ; this is a personal preference thing
-        ; feel free to comment out or delete
+        ;; wait a moment then scroll to first ability
+        ;; this is a personal preference thing
+        ;; feel free to comment out or delete
         Sleep 750
         Send {WheelDown}
     return

@@ -1,5 +1,5 @@
-﻿#SingleInstance Force
-;#Warn
+#SingleInstance Force
+;; #Warn
 #NoEnv
 #Persistent
 #MaxThreadsPerHotkey 20
