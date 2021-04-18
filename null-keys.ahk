@@ -17,7 +17,7 @@ SetNumLockState AlwaysOn
 SetCapsLockState AlwaysOff
 SetScrollLockState AlwaysOff
 
-#Include <Notify>
+#Include lib/Notify.ahk
 #Include funcs.ahk
 
 is_reloading := ReadConfig("reloading")
