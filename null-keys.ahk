@@ -1,5 +1,4 @@
 #SingleInstance Force
-;; #Warn
 #NoEnv
 #Persistent
 #MaxThreadsPerHotkey 20
@@ -11,19 +10,25 @@ SetTitleMatchMode 2
 ListLines Off
 #KeyHistory 20
 
+if not A_IsAdmin
+{
+    Run *RunAs %A_ScriptFullPath%
+    ExitApp
+}
+
 GroupAdd SCRIPT_EDIT, %A_ScriptName%
 
 SetNumLockState AlwaysOn
 SetCapsLockState AlwaysOff
 SetScrollLockState AlwaysOff
 
+;#Include lib/Nuetron.ahk
 #Include lib/Notify.ahk
 #Include funcs.ahk
 
 is_reloading := ReadConfig("reloading")
 If (is_reloading)
 {
-    WriteConfig("reloading", false)
     sleep 750
     Notify().Toast(" null-keys reloaded ")
 }
@@ -32,7 +37,6 @@ else
     Notify().Toast(" null-keys loaded ")
 }
 
-InitConfig()
 ResetConfig()
 
 #Include hotkeys.ahk

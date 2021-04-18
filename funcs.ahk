@@ -5,15 +5,6 @@
     return found = 0 ? false : true
 }
 
-InitConfig()
-{
-    cfg_exists := CheckConfig()
-    if (!cfg_exists)
-    {
-        FileAppend `n/* --- BEGIN CONFIG ---`n[config]`nreloading=0`n--- END CONFIG --- */`n, %A_ScriptFullPath%
-    }
-}
-
 ReadConfig(key)
 {
     IniRead value, %A_ScriptFullPath%, config, %key%
@@ -27,6 +18,7 @@ WriteConfig(key, value)
 
 ResetConfig()
 {
+    IniWrite 0, %A_ScriptFullPath%, config, reloading
     IniWrite 0, %A_ScriptFullPath%, config, brewing
     IniWrite 0, %A_ScriptFullPath%, config, canceled
 }
@@ -56,7 +48,7 @@ TeaTimer(mins)
 {
     total_seconds := mins * 60
     millis := total_seconds * 1000
-    end_tick := A_TickCount + (millis)
+    end_tick := A_TickCount + millis
     is_brewing := ReadConfig("brewing")
     if (is_brewing = 0)
     {
