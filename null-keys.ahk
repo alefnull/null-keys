@@ -22,7 +22,7 @@ SetNumLockState AlwaysOn
 SetCapsLockState AlwaysOff
 SetScrollLockState AlwaysOff
 
-;#Include lib/Nuetron.ahk
+;#Include lib/Neutron.ahk
 #Include lib/Notify.ahk
 #Include funcs.ahk
 
