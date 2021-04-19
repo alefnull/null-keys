@@ -2,9 +2,6 @@
 ;; https://github.com/maestrith/Notify
 ;; slightly modified by me to provide preferred defaults
 
-#SingleInstance,Force
-Count:=0
-Notify:=Notify(20)
 /*
 	Usage:
 	Notify:=Notify()
@@ -48,7 +45,7 @@ Class NotifyClass{
 			OnMessage(0x201,NotifyClass.Click.Bind(this)),this.Init:=1
 	}Toast(Text,Info:=""){
 		Info ? Info : Info := []
-		for a,b in {Animate:"Blend",Destroy:"Blend",ShowDelay:500,Background:"0x222222",Color:"0xDDDDDD",TitleColor:"0xDDDDDD",Font:"CaskaydiaCove NF",Radius:30,Time:3000,TitleSize:30,TitleFont:"CaskaydiaCove NF",Size:30,Font:"CaskaydiaCove NF",IconSize:20}
+		for a,b in {Animate:"Blend",Destroy:"Blend",ShowDelay:500,Background:"0x222222",Color:"0xDDDDDD",TitleColor:"0xDDDDDD",Font:"CaskaydiaCove NF",Radius:30,Time:3000,TitleSize:20,TitleFont:"CaskaydiaCove NF",Size:20,Font:"CaskaydiaCove NF",IconSize:20}
 			if(Info[a]="")
 				Info[a]:=b
 		if(!IsObject(Win:=NotifyClass.Windows))
@@ -62,7 +59,7 @@ Class NotifyClass{
 		this.Hidden:=Hidden:=A_DetectHiddenWindows,this.Current:=ID:=++this.ID,Owner:=WinActive("A")
  		Gui,Win%ID%:Default
 		if(Info.Radius)
-			Gui,Margin,% Floor(Info.Radius/3),% Floor(Info.Radius/3)
+			Gui,Margin,% Floor(Info.Radius/3),% Floor(Info.Radius/2)
 		Gui,-Caption +HWNDMain +AlwaysOnTop +Owner%Owner%
 		Gui,Color,% Info.Background,% Info.Background
 		NotifyClass.Windows[ID]:={ID:"ahk_id" Main,HWND:Main,Win:"Win" ID,Text:Text,Background:Info.Background,FlashColor:Info.FlashColor,Title:Info.Title,ShowDelay:Info.ShowDelay,Destroy:Info.Destroy}
@@ -90,7 +87,7 @@ Class NotifyClass{
 			NotifyClass.Windows[ID].Timer:=TT
 		}
 		for a,b in StrSplit(Info.Buttons,","){
-			Gui,Margin,% Info.Radius?Info.Radius/2:5,5
+			Gui,Margin,% Info.Radius?Info.Radius:5,5
 			Gui,Font,s10
 			Gui,Add,Button,% (a=1?"xm":"x+m"),%b%
 		}
@@ -139,7 +136,7 @@ Class NotifyClass{
 			Height+=h+this.Margin
 			if(MH<=Height)
 				Sub:=Width-MinX.MinIndex()+this.Margin,MY:=MH,MinY:=[],MinX:=[],Height:=h,MaxW:={0:1},Reset:=1
-			MaxW[w]:=1,MinX[Width-w-Sub]:=1,MinY[MY:=MY-h-this.Margin]:=y,XPos:=MinX.MinIndex()+(Reset?0:MaxW.MaxIndex()-w)
+			MaxW[w]:=1,MinX[Width-w-Sub]:=1,MinY[MY:=MY-h-this.Margin]:=y,XPos:=-10+MinX.MinIndex()+(Reset?0:MaxW.MaxIndex()-w)
 			WinMove,% b.ID,,%XPos%,MinY.MinIndex()
 			Obj[a]:={x:x,y:y,w:w,h:h},Reset:=0
 		}DetectHiddenWindows,%Hidden%
