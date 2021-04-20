@@ -30,10 +30,10 @@ CapsLock & p::Notepad()
 CapsLock & t::Terminal()
 
 ;; emoji/emotes
-CapsLock & /::Send ¯\_(●_●)_/¯ ;; shrug ¯\_(●_●)_/¯
-CapsLock & [::Send (●_●) ;; face neutral (●_●)
-CapsLock & ]::Send (●_◉) ;; face raised eyebrow (●_◉)
-CapsLock & \::Send (ノ●_●)ノ︵┻━┻ ;; table flip (ノ●_●)ノ︵┻━┻
+CapsLock & /::Clip("¯\_(●_●)_/¯") ;; shrug ¯\_(●_●)_/¯
+CapsLock & [::Clip("(●_●)") ;; face neutral (●_●)
+CapsLock & ]::Clip("(●_◉)") ;; face raised eyebrow (●_◉)
+CapsLock & \::Clip("(ノ●_●)ノ︵┻━┻") ;; table flip (ノ●_●)ノ︵┻━┻
 
 ;; snap active window to FancyZones zone
 CapsLock & w::Send #{Right}

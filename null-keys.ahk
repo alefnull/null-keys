@@ -24,6 +24,7 @@ SetScrollLockState AlwaysOff
 
 ;#Include lib/Neutron.ahk
 #Include lib/Notify.ahk
+#Include lib/Clip.ahk
 #Include funcs.ahk
 
 is_reloading := ReadConfig("reloading")
