@@ -2,6 +2,7 @@
 #NoEnv
 #Persistent
 #MaxThreadsPerHotkey 20
+Process Priority, , A
 SetWorkingDir %A_ScriptDir%
 SendMode Input
 SetBatchLines -1
@@ -31,11 +32,11 @@ is_reloading := ReadConfig("reloading")
 If (is_reloading)
 {
     sleep 750
-    Notify().Toast(" null-keys reloaded ")
+    Notify().Toast(" null-keys reloaded ", {Time:3000})
 }
 else
 {
-    Notify().Toast(" null-keys loaded ")
+    Notify().Toast(" null-keys loaded ", {Time:3000})
 }
 
 ResetConfig()

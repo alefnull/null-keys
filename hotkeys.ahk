@@ -46,6 +46,11 @@ Return
 
 ;; tea timer
 CapsLock & '::TeaTimer(3)
+;; general timer
+CapsLock & =::
+InputBox inpt,timer,"how many minutes?"
+TeaTimer(inpt)
+return
 
 ;; adjust volume via mousewheel over tray/taskbar
 #If MouseIsOver("ahk_class Shell_TrayWnd")
@@ -67,7 +72,7 @@ CapsLock & Right::Send ^#{Right}
 ;; empty recycle bin
 CapsLock & Del::
     FileRecycleEmpty
-    Notify().Toast(" recycle bin emptied ")
+    Notify().Toast(" recycle bin emptied ", {Time:3000})
 return
 
 ;; edit this script in default editor

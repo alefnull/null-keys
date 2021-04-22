@@ -53,7 +53,7 @@ TeaTimer(mins)
     if (is_brewing = 0)
     {
         WriteConfig("brewing", 1)
-        Notify().Toast(" starting tea timer: " . mins . " min ",{Color:"0xFF44FF"})
+        Notify().Toast(" starting tea timer: " . mins . " min ",{Color:"0xFF44FF", Time:3000})
         Gui New,hwndTeaTimer
         Gui +E0x20 -Caption +AlwaysOnTop +Owner +LastFound
         WinSet Transparent, 150
@@ -66,7 +66,7 @@ TeaTimer(mins)
                 WriteConfig("brewing", 0)
                 WriteConfig("canceled", 0)
                 GuiDestroyAll()
-                Notify().Toast(" why would you cancel a tea timer? ",{Color:"0xFF44FF"})
+                Notify().Toast(" why would you cancel a tea timer? ",{Color:"0xFF44FF", Time:3000})
                 Goto break_outer
             }
             width := A_ScreenWidth * (1 - (end_tick - A_TickCount)/millis)
@@ -75,7 +75,7 @@ TeaTimer(mins)
         }
         Gui Destroy
         WriteConfig("brewing", 0)
-        Notify().Toast(" your tea is (probably) ready ",{Color:"0xFF44FF"})
+        Notify().Toast(" your tea is (probably) ready ",{Color:"0xFF44FF", Time:3000})
     }
     else
     {
@@ -102,7 +102,7 @@ Swapp(win_title, target_exe)
         {
             WinGet hWnd, ID, %win_title%
             DllCall("SetForegroundWindow", UInt, hWnd)
-            Sleep 150
+            Sleep 200
             WinGet WinId, ID, %win_title%
             DllCall("SwitchToThisWindow", "UInt", WinId, "UInt", 1)
         }
@@ -138,7 +138,7 @@ Guilded()
 
 Firefox()
 {
-    win_title = Firefox ahk_class MozillaWindowClass
+    win_title = Mozilla Firefox ahk_class MozillaWindowClass
     target_exe = "C:\Program Files\Mozilla Firefox\firefox.exe"
     Swapp(win_title, target_exe)
 }

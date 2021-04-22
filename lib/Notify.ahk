@@ -45,7 +45,7 @@ Class NotifyClass{
 			OnMessage(0x201,NotifyClass.Click.Bind(this)),this.Init:=1
 	}Toast(Text,Info:=""){
 		Info ? Info : Info := []
-		for a,b in {Animate:"Blend",Destroy:"Blend",ShowDelay:500,Background:"0x222222",Color:"0xDDDDDD",TitleColor:"0xDDDDDD",Font:"CaskaydiaCove NF",Radius:30,Time:3000,TitleSize:20,TitleFont:"CaskaydiaCove NF",Size:20,Font:"CaskaydiaCove NF",IconSize:20}
+		for a,b in {Animate:"Blend",Destroy:"Blend",ShowDelay:500,Background:"0x222222",Color:"0xDDDDDD",TitleColor:"0xDDDDDD",Radius:30,Font:"CaskaydiaCove NF",Size:20,TitleFont:"CaskaydiaCove NF",TitleSize:10,IconSize:20}
 			if(Info[a]="")
 				Info[a]:=b
 		if(!IsObject(Win:=NotifyClass.Windows))
@@ -92,9 +92,10 @@ Class NotifyClass{
 			Gui,Add,Button,% (a=1?"xm":"x+m"),%b%
 		}
 		if(Info.Progress!=""){
+            global myProgress
 			Gui,Win%ID%:Font,s4
 			ControlGetPos,x,y,w,h,,ahk_id%Text%
-			Gui,Add,Progress,w%w% HWNDProgress,% Info.Progress
+			Gui,Add,Progress,w%w% HWNDProgress vmyProgress,% Info.Progress
 			NotifyClass.Windows[ID].Progress:=Progress
 		}Gui,Win%ID%:Show,Hide
 		WinGetPos,x,y,w,h,ahk_id%Main%
