@@ -99,12 +99,13 @@ Space::Enter
 #IfWinActive
 
 ;; always-on-top window snips
-CapsLock & LButton::SCW_ScreenClip2Win(1)
+CapsLock & LButton::SCW_ScreenClip2Win(0)
 
 #IfWinActive ScreenClippingWindow ahk_class AutoHotkeyGUI
 CapsLock::
 Esc::WinClose, ScreenClippingWindow ahk_class AutoHotkeyGUI ;; close active snip
 ^s::SCW_Win2File(0) ;; save active snip to 'shots' folder in A_ScriptDir
+^c::SCW_Win2Clipboard(0) ;; copy to clipboard w/o border
 #IfWinActive
 
 #If MouseIsOver("ScreenClippingWindow ahk_class AutoHotkeyGUI")
