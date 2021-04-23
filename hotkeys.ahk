@@ -107,6 +107,10 @@ Esc::WinClose, ScreenClippingWindow ahk_class AutoHotkeyGUI ;; close active snip
 ^s::SCW_Win2File(0) ;; save active snip to 'shots' folder in A_ScriptDir
 #IfWinActive
 
+#If MouseIsOver("ScreenClippingWindow ahk_class AutoHotkeyGUI")
+RButton::WinClose, ScreenClippingWindow ahk_class AutoHotkeyGUI
+#If
+
 ;; warframe - zenurik energizing dash
 #IfWinActive Warframe
     CapsLock & MButton::
