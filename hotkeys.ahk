@@ -98,6 +98,16 @@ return
 Space::Enter
 #IfWinActive
 
+;; always-on-top window snips
+CapsLock & LButton::SCW_ScreenClip2Win(1)
+;; esc/capslock to close active window snip
+#IfWinActive ScreenClippingWindow ahk_class AutoHotkeyGUI
+CapsLock::
+Esc::WinClose, ScreenClippingWindow ahk_class AutoHotkeyGUI ;; close active snip
+^c::SCW_Win2Clipboard(0) ;; copies to clipboard by default w/o border
+^s::SCW_Win2File(0) ;; save active snip to 'shots' folder in A_ScriptDir
+#IfWinActive
+
 ;; warframe - zenurik energizing dash
 #IfWinActive Warframe
     CapsLock & MButton::
