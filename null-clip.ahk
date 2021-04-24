@@ -23,7 +23,7 @@ SCW_SetUp(Options="") {
 	SCW_Default(StartAfter,80), SCW_Default(MaxGuis,6)
 	SCW_Default(AutoMonitorWM_LBUTTONDOWN,1), SCW_Default(DrawCloseButton,0)
 	SCW_Default(BorderAColor,"ffdddddd"), SCW_Default(BorderBColor,"ffdddddd")
-	SCW_Default(SelColor,"White"), SCW_Default(SelTrans,80)
+	SCW_Default(SelColor,"19B3EE"), SCW_Default(SelTrans,100)
 
 	SCW_Reg("MaxGuis", MaxGuis), SCW_Reg("StartAfter", StartAfter), SCW_Reg("DrawCloseButton", DrawCloseButton)
 	SCW_Reg("BorderAColor", BorderAColor), SCW_Reg("BorderBColor", BorderBColor)
@@ -174,6 +174,7 @@ SCW_Default(ByRef Variable,DefaultValue) {
 
 SCW_Win2Clipboard(KeepBorders=0) {
 	Send, !{PrintScreen} ; Active Win's client area to Clipboard
+    Sleep 50
 	if !KeepBorders {
 		pToken := Gdip_Startup()
 		pBitmap := Gdip_CreateBitmapFromClipboard()

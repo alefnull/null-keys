@@ -17,14 +17,16 @@ if not A_IsAdmin
     ExitApp
 }
 
-if ((A_PtrSize = 8 && A_IsCompiled = "") || !A_IsUnicode) { ;32 bit=4  ;64 bit=8
-	 SplitPath,A_AhkPath,,dir
-	 if (!FileExist(correct := dir "\AutoHotkeyU32.exe")) {
-		 MsgBox requires AHK 32-bit
-		 ExitApp
-	 }
-	 Run,"%correct%" "%A_ScriptName%",%A_ScriptDir%
-	 ExitApp
+if ((A_PtrSize = 8 && A_IsCompiled = "") || !A_IsUnicode)
+{ ;32 bit=4  ;64 bit=8
+    SplitPath,A_AhkPath,,dir
+    if (!FileExist(correct := dir "\AutoHotkeyU32.exe"))
+    {
+        MsgBox requires AHK 32-bit
+        ExitApp
+    }
+    Run,"%correct%" "%A_ScriptName%",%A_ScriptDir%
+    ExitApp
 }
 
 icon = null-keys.ico
