@@ -100,11 +100,10 @@ Swapp(win_title, target_exe)
         }
         else
         {
-            WinGet hWnd, ID, %win_title%
-            DllCall("SetForegroundWindow", UInt, hWnd)
-            Sleep 200
-            WinGet WinId, ID, %win_title%
-            DllCall("SwitchToThisWindow", "UInt", WinId, "UInt", 1)
+            WinGet win_id, ID, %win_title%
+            Sleep 100
+            DllCall("SetForegroundWindow", UInt, win_id)
+            DllCall("SwitchToThisWindow", "UInt", win_id, "UInt", 1)
         }
     }
     else
