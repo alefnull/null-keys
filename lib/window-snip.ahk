@@ -206,7 +206,7 @@ SCW_Win2File(KeepBorders=0) {
 		pBitmap2 := SCW_CropImage(pBitmap, 3, 3, w-6, h-6)
 		;~ File2:=A_Desktop . "\" . A_Now . ".PNG" ; tervon  time /path to file to save
 		FormatTime, TodayDate , YYYYMMDDHH24MISS, yyyy_MMM_dd@hh_mmtt
-		File2:=A_ScriptDir . "\shots\" . TodayDate . ".PNG" ;path to file to save
+		File2:=A_ScriptDir . "\snips\" . TodayDate . ".PNG" ;path to file to save
 		Gdip_SaveBitmapToFile(pBitmap2, File2) ;Exports automatcially to file
 		Gdip_DisposeImage(pBitmap), Gdip_DisposeImage(pBitmap2)
 		Gdip_Shutdown("pToken")
