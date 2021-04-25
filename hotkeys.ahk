@@ -106,11 +106,17 @@ CapsLock::
 Esc::WinClose, ScreenClippingWindow ahk_class AutoHotkeyGUI ;; close active snip
 ^s::SCW_Win2File(0) ;; save active snip to 'shots' folder in A_ScriptDir
 ^c::SCW_Win2Clipboard(0) ;; copy to clipboard w/o border
-~LButton:: ;; double click any snip to close
-	If (A_PriorHotKey = A_ThisHotKey and A_TimeSincePriorHotkey < 200)
-		WinClose ScreenClippingWindow ahk_class AutoHotkeyGUI
-Return
 #IfWinActive
+
+~LButton:: ;; double click any snip to close
+	MouseGetPos,,, win_id
+	WinGetTitle, win_title, ahk_id %win_id%
+    if (win_title = "ScreenClippingWindow")
+    {
+        If (A_PriorHotKey = A_ThisHotKey and A_TimeSincePriorHotkey < 200)
+            WinClose ScreenClippingWindow ahk_class AutoHotkeyGUI
+    }
+Return
 
 ;; warframe - zenurik energizing dash
 #IfWinActive Warframe
