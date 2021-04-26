@@ -163,10 +163,10 @@ SCW_LBUTTONDOWN() {
 SCW_GetSet(variable, value="") {
 	static
 	if (value = "") {
-		yaqxswcdevfr := kxucfp%variable%pqzmdk
-		Return yaqxswcdevfr
+		Temp := SCW_%variable%
+		Return Temp
 	} Else
-	kxucfp%variable%pqzmdk = %value%
+	SCW_%variable% = %value%
 }
 
 SCW_Default(ByRef Variable,DefaultValue) {
