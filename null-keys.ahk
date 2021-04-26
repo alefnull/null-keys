@@ -1,4 +1,4 @@
-#SingleInstance Force
+﻿#SingleInstance Force
 #NoEnv
 #Persistent
 #MaxThreadsPerHotkey 20
@@ -111,11 +111,6 @@ Return
 
 ;; tea timer
 CapsLock & '::TeaTimer(3)
-;; general timer
-CapsLock & =::
-InputBox inpt,timer,"how many minutes?"
-TeaTimer(inpt)
-return
 
 ;; adjust volume via mousewheel over tray/taskbar
 #If MouseIsOver("ahk_class Shell_TrayWnd")
