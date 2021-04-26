@@ -163,10 +163,10 @@ SCW_LBUTTONDOWN() {
 SCW_GetSet(variable, value="") {
 	static
 	if (value = "") {
-		Temp := SCW_%variable%
-		Return Temp
+		SCW_VarTemp := SCW_Var%variable%
+		Return SCW_VarTemp
 	} Else
-	SCW_%variable% = %value%
+	SCW_Var%variable% = %value%
 }
 
 SCW_Default(ByRef Variable,DefaultValue) {
