@@ -24,13 +24,13 @@ SCW_SetUp(Options="") {
 
 	SCW_Default(StartAfter,80), SCW_Default(MaxGuis,6)
 	SCW_Default(AutoMonitorWM_LBUTTONDOWN,1), SCW_Default(DrawCloseButton,0)
-	SCW_Default(BorderAColor,"ffdddddd"), SCW_Default(BorderBColor,"ffdddddd")
-	SCW_Default(SelColor,"19B3EE"), SCW_Default(SelTrans,100)
+	SCW_Default(BorderAColor,"ffdddddd"), SCW_Default(BorderBColor,"ffffffff")
+	SCW_Default(SelColor,"19B3EE"), SCW_Default(SelTrans,30)
 
-	SCW_Reg("MaxGuis", MaxGuis), SCW_Reg("StartAfter", StartAfter), SCW_Reg("DrawCloseButton", DrawCloseButton)
-	SCW_Reg("BorderAColor", BorderAColor), SCW_Reg("BorderBColor", BorderBColor)
-	SCW_Reg("SelColor", SelColor), SCW_Reg("SelTrans",SelTrans)
-	SCW_Reg("WasSetUp", 1)
+	SCW_GetSet("MaxGuis", MaxGuis), SCW_GetSet("StartAfter", StartAfter), SCW_GetSet("DrawCloseButton", DrawCloseButton)
+	SCW_GetSet("BorderAColor", BorderAColor), SCW_GetSet("BorderBColor", BorderBColor)
+	SCW_GetSet("SelColor", SelColor), SCW_GetSet("SelTrans",SelTrans)
+	SCW_GetSet("WasSetUp", 1)
 	if AutoMonitorWM_LBUTTONDOWN
 	OnMessage(0x201, "SCW_LBUTTONDOWN")
 }
@@ -39,10 +39,10 @@ SCW_ScreenClip2Win(clip=0) {
 	static c
 	global defaultSignature, origText
 
-	if !(SCW_Reg("WasSetUp"))
+	if !(SCW_GetSet("WasSetUp"))
 		SCW_SetUp()
 
-	StartAfter := SCW_Reg("StartAfter"), MaxGuis := SCW_Reg("MaxGuis"), SelColor := SCW_Reg("SelColor"), SelTrans := SCW_Reg("SelTrans")
+	StartAfter := SCW_GetSet("StartAfter"), MaxGuis := SCW_GetSet("MaxGuis"), SelColor := SCW_GetSet("SelColor"), SelTrans := SCW_GetSet("SelTrans")
 	c++
 	if (c > MaxGuis)
 		c := 1
@@ -63,7 +63,7 @@ SCW_ScreenClip2Win(clip=0) {
 	pBitmap := Gdip_BitmapFromScreen(Area)
 
 	;*******************************************************
-	SCW_CreateLayeredWinMod(GuiNum,pBitmap,v1,v2, SCW_Reg("DrawCloseButton"))
+	SCW_CreateLayeredWinMod(GuiNum,pBitmap,v1,v2, SCW_GetSet("DrawCloseButton"))
 	Gdip_Shutdown("pToken")
 	if (clip=1){
 		;********************** added to copy to clipboard by default*********************************
@@ -113,7 +113,7 @@ SCW_SelectAreaMod(Options="") {
 
 SCW_CreateLayeredWinMod(GuiNum,pBitmap,x,y,DrawCloseButton=0) {
 	static CloseButton := 16
-	BorderAColor := SCW_Reg("BorderAColor"), BorderBColor := SCW_Reg("BorderBColor")
+	BorderAColor := SCW_GetSet("BorderAColor"), BorderBColor := SCW_GetSet("BorderBColor")
 
 	; IniRead, ClipBorder, % script.configfile, Settings, ClipBorder, % false
 
@@ -139,9 +139,9 @@ SCW_CreateLayeredWinMod(GuiNum,pBitmap,x,y,DrawCloseButton=0) {
 
 	UpdateLayeredWindow(hwnd, hdc, x-3, y-3, Width+6, Height+6)
 	SelectObject(hdc, obm), DeleteObject(hbm), DeleteDC(hdc), Gdip_DeleteGraphics(G)
-	SCW_Reg("G" GuiNum "#HWND", hwnd)
-	SCW_Reg("G" GuiNum "#XClose", Width+6-CloseButton)
-	SCW_Reg("G" GuiNum "#YClose", CloseButton)
+	SCW_GetSet("G" GuiNum "#HWND", hwnd)
+	SCW_GetSet("G" GuiNum "#XClose", Width+6-CloseButton)
+	SCW_GetSet("G" GuiNum "#YClose", CloseButton)
 	Return hwnd
 }
 
@@ -153,14 +153,14 @@ SCW_LBUTTONDOWN() {
 		KeyWait, Lbutton
 		CoordMode, mouse, Relative
 		MouseGetPos, x,y
-	  XClose := SCW_Reg("G" A_Gui "#XClose"), YClose := SCW_Reg("G" A_Gui "#YClose")
+	  XClose := SCW_GetSet("G" A_Gui "#XClose"), YClose := SCW_GetSet("G" A_Gui "#YClose")
 		if (x > XClose and y < YClose)
 		Gui %A_Gui%: Destroy
 		return 1   ; confirm that click was on module's screen clipping windows
 	}
 }
 
-SCW_Reg(variable, value="") {
+SCW_GetSet(variable, value="") {
 	static
 	if (value = "") {
 		yaqxswcdevfr := kxucfp%variable%pqzmdk
