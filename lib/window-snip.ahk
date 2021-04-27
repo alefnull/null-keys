@@ -24,8 +24,8 @@ SCW_SetUp(Options="") {
 
 	SCW_Default(StartAfter,80), SCW_Default(MaxGuis,6)
 	SCW_Default(AutoMonitorWM_LBUTTONDOWN,1), SCW_Default(DrawCloseButton,0)
-	SCW_Default(BorderAColor,"ffdddddd"), SCW_Default(BorderBColor,"ffffffff")
-	SCW_Default(SelColor,"19B3EE"), SCW_Default(SelTrans,30)
+	SCW_Default(BorderAColor,"cc3399FF"), SCW_Default(BorderBColor,"cc3399FF")
+	SCW_Default(SelColor,"3399FF"), SCW_Default(SelTrans,100)
 
 	SCW_GetSet("MaxGuis", MaxGuis), SCW_GetSet("StartAfter", StartAfter), SCW_GetSet("DrawCloseButton", DrawCloseButton)
 	SCW_GetSet("BorderAColor", BorderAColor), SCW_GetSet("BorderBColor", BorderBColor)
@@ -128,7 +128,7 @@ SCW_CreateLayeredWinMod(GuiNum,pBitmap,x,y,DrawCloseButton=0) {
 	Gdip_DrawImage(G, pBitmap, 3, 3, Width, Height)
 	Gdip_DisposeImage(pBitmap)
 
-	pPen1 := Gdip_CreatePen("0x" BorderAColor, 3), pPen2 := Gdip_CreatePen("0x" BorderBColor, 1)
+	pPen1 := Gdip_CreatePen("0x" BorderAColor, 5), pPen2 := Gdip_CreatePen("0x" BorderBColor, 1)
 	if DrawCloseButton {
 		Gdip_DrawRectangle(G, pPen1, 1+Width-CloseButton+3, 1, CloseButton, CloseButton)
 		Gdip_DrawRectangle(G, pPen2, 1+Width-CloseButton+3, 1, CloseButton, CloseButton)
@@ -181,7 +181,7 @@ SCW_Win2Clipboard(KeepBorders=0) {
 		pToken := Gdip_Startup()
 		pBitmap := Gdip_CreateBitmapFromClipboard()
 		Gdip_GetDimensions(pBitmap, w, h)
-		pBitmap2 := SCW_CropImage(pBitmap, 3, 3, w-6, h-6)
+		pBitmap2 := SCW_CropImage(pBitmap, 5, 5, w-10, h-10)
 		Gdip_SetBitmapToClipboard(pBitmap2)
 		Gdip_DisposeImage(pBitmap), Gdip_DisposeImage(pBitmap2)
 		Gdip_Shutdown("pToken")
@@ -203,7 +203,7 @@ SCW_Win2File(KeepBorders=0) {
 		pToken := Gdip_Startup()
 		pBitmap := Gdip_CreateBitmapFromClipboard()
 		Gdip_GetDimensions(pBitmap, w, h)
-		pBitmap2 := SCW_CropImage(pBitmap, 3, 3, w-6, h-6)
+		pBitmap2 := SCW_CropImage(pBitmap, 5, 5, w-10, h-10)
 		;~ File2:=A_Desktop . "\" . A_Now . ".PNG" ; tervon  time /path to file to save
 		FormatTime, TodayDate , YYYYMMDDHH24MISS, yyyy_MMM_dd@hh_mmtt
 		File2:=A_ScriptDir . "\snips\" . TodayDate . ".PNG" ;path to file to save
