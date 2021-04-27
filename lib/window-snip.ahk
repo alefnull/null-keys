@@ -150,12 +150,6 @@ SCW_LBUTTONDOWN() {
 	WinGetTitle, Title, ahk_id %WinUMID%
 	if (Title = "ScreenClippingWindow") {
 		PostMessage, 0xA1, 2,,, ahk_id %WinUMID%
-		KeyWait, Lbutton
-		CoordMode, mouse, Relative
-		MouseGetPos, x,y
-	  XClose := SCW_GetSet("G" A_Gui "#XClose"), YClose := SCW_GetSet("G" A_Gui "#YClose")
-		if (x > XClose and y < YClose)
-		Gui %A_Gui%: Destroy
 		return 1   ; confirm that click was on module's screen clipping windows
 	}
 }
@@ -163,10 +157,10 @@ SCW_LBUTTONDOWN() {
 SCW_GetSet(variable, value="") {
 	static
 	if (value = "") {
-		SCW_VarTemp := SCW_Var%variable%
-		Return SCW_VarTemp
+		NullKeysVar_Temp := NullKeysVar_%variable%
+		Return NullKeysVar_Temp
 	} Else
-	SCW_Var%variable% = %value%
+	NullKeysVar_%variable% = %value%
 }
 
 SCW_Default(ByRef Variable,DefaultValue) {
