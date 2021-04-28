@@ -169,10 +169,10 @@ return
 CapsLock & LButton::SCW_ScreenClip2Win(1)
 
 #IfWinActive ScreenClippingWindow ahk_class AutoHotkeyGUI
-CapsLock::
-Esc::WinClose, ScreenClippingWindow ahk_class AutoHotkeyGUI ;; close active snip
-^s::SCW_Win2File(0) ;; save active snip to 'shots' folder in A_ScriptDir
-^c::SCW_Win2Clipboard(0) ;; copy to clipboard w/o border
+    CapsLock::
+    Esc::WinClose, ScreenClippingWindow ahk_class AutoHotkeyGUI ;; close active snip
+    ^s::SCW_Win2File(0) ;; save active snip to 'shots' folder in A_ScriptDir
+    ^c::SCW_Win2Clipboard(0) ;; copy to clipboard w/o border
 #IfWinActive
 
 ~LButton:: ;; double click any snip to close
@@ -204,32 +204,38 @@ Return
 
 ;; auto-reload script on save
 #IfWinActive ahk_group SCRIPT_EDIT
-~^s::
-    sleep 1000
-    ReloadScript()
-return
+    ~^s::
+        sleep 1000
+        ReloadScript()
+    return
 #IfWinActive
 
 ;; use Space as Enter in ueli
 #IfWinActive ueli
-Space::Enter
+    Space::Enter
 #IfWinActive
 
 ;; sticky note hotkeys
 #If WinActive("hwndNotes")
-Esc::
-CapsLock::WinClose hwndNotes
-^s::
-    ControlGetText NotesEdit
-    FileDelete %A_ScriptDir%\notes.txt
-    FileAppend %NotesEdit%, %A_ScriptDir%\notes.txt
-    WinClose hwndNotes
-    Notify().Toast(" notes file saved ", {Time:3000})
-return
+    ^s::
+        ControlGetText NotesEdit
+        FileDelete %A_ScriptDir%\notes.txt
+        FileAppend %NotesEdit%, %A_ScriptDir%\notes.txt
+        WinClose hwndNotes
+        Notify().Toast(" notes file saved ", {Time:3000})
+    return
+    ^l::
+        if (FileExist(A_ScriptDir "\notes.txt"))
+        {
+            FileRead notes_content, %A_ScriptDir%\notes.txt
+            GuiControl,, NotesEdit, %notes_content%
+            Send ^{End}
+        }
+    return
 #If
 
 #If MouseIsOver("hwndNotes")
-CapsLock & MButton::WinClose hwndNotes
+    MButton::Gui Hide
 #If
 
 ;; adjust volume via mousewheel over tray/taskbar
