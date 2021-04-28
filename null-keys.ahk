@@ -1,4 +1,12 @@
-﻿#SingleInstance Force
+﻿;;                       /##
+;;                      | ##
+;;  /######  /##   /## /######    /######   /######  /##   /##  /######   /#######
+;; |____  ##| ##  | ##|_  ##_/   /##__  ## /##__  ##|  ## /##/ /##__  ## /##_____/
+;;  /#######| ##  | ##  | ##    | ##  \ ##| ######## \  ####/ | ########| ##
+;; /##__  ##| ##  | ##  | ## /##| ##  | ##| ##_____/  >##  ## | ##_____/| ##
+;;|  #######|  ######/  |  ####/|  ######/|  ####### /##/\  ##|  #######|  #######
+;; \_______/ \______/    \___/   \______/  \_______/|__/  \__/ \_______/ \_______/
+#SingleInstance Force
 #NoEnv
 #Persistent
 #MaxThreadsPerHotkey 20
@@ -39,6 +47,16 @@ SetNumLockState AlwaysOn
 SetCapsLockState AlwaysOff
 SetScrollLockState AlwaysOff
 
+Gui +AlwaysOnTop -Caption +LastFound +OwnDialogs +Resize +ToolWindow +MinSize320x240 +MaxSize640x480 +HwndhwndNotes
+Gui Font, s14 w1, CaskaydiaCove NF
+Gui Add, Edit, vNotesEdit x0 y0 w320 h240
+if (FileExist(A_ScriptDir "\notes.txt"))
+{
+    FileRead notes_content, %A_ScriptDir%\notes.txt
+    GuiControl,, NotesEdit, %notes_content%
+}
+OnMessage(0x201, "ClickDrag")
+
 ;#Include lib/Neutron.ahk
 #Include lib/Gdip_All.ahk
 #Include lib/Notify.ahk
@@ -46,25 +64,23 @@ SetScrollLockState AlwaysOff
 #Include lib/window-snip.ahk
 #Include lib/funcs.ahk
 
-is_reloading := ReadConfig("reloading")
-If (is_reloading)
-{
-    sleep 750
-    Notify().Toast(" null-keys reloaded ", {Time:3000})
-}
-else
-{
-    Notify().Toast(" null-keys loaded ", {Time:3000})
-}
 ResetConfig()
+Notify().Toast(" null-keys loaded ", {Time:3000})
 ;; end auto-exec
 return
 
-;; ####################################
-;; ##            hotkeys             ##
-;; ####################################
-;; use capslock as meta key / escape
-;; RAlt + capslock if you *really* need it
+
+;; /##                   /##     /##
+;;| ##                  | ##    | ##
+;;| #######   /######  /######  | ##   /##  /######  /##   /##  /#######
+;;| ##__  ## /##__  ##|_  ##_/  | ##  /##/ /##__  ##| ##  | ## /##_____/
+;;| ##  \ ##| ##  \ ##  | ##    | ######/ | ########| ##  | ##|  ######
+;;| ##  | ##| ##  | ##  | ## /##| ##_  ## | ##_____/| ##  | ## \____  ##
+;;| ##  | ##|  ######/  |  ####/| ## \  ##|  #######|  ####### /#######/
+;;|__/  |__/ \______/    \___/  |__/  \__/ \_______/ \____  ##|_______/
+;;                                                   /##  | ##
+;; use capslock as meta key / escape                |  ######/
+;; RAlt + capslock if you *really* need it           \______/
 CapsLock::Esc
 RAlt & CapsLock::CapsLock
 
@@ -91,7 +107,6 @@ Return
 CapsLock & d::Discord()
 CapsLock & f::Firefox()
 CapsLock & g::Guilded()
-CapsLock & p::Notepad()
 CapsLock & t::Terminal()
 
 ;; emoji/emotes
@@ -111,13 +126,6 @@ Return
 
 ;; tea timer
 CapsLock & '::TeaTimer(3)
-
-;; adjust volume via mousewheel over tray/taskbar
-#If MouseIsOver("ahk_class Shell_TrayWnd")
-    MButton::Send {Volume_Mute}
-    WheelUp::Send {Volume_Up 5}
-    WheelDown::Send {Volume_Down 5}
-#If
 
 ;; ueli
 CapsLock & Space::Send !{Space}
@@ -145,21 +153,20 @@ CapsLock & r::
     ReloadScript()
 return
 
-;; auto-reload script on save
-#IfWinActive ahk_group SCRIPT_EDIT
-~^s::
-    sleep 1000
-    ReloadScript()
+;; sticky notes show/hide
+CapsLock & p::
+    if !(WinActive("hwndNotes"))
+    {
+        Gui Show, w320 h240, hwndNotes
+        GuiControl Focus, NotesEdit
+        Send ^{End}
+        return
+    }
+    Gui Hide
 return
-#IfWinActive
-
-;; use Space as Enter in ueli
-#IfWinActive ueli
-Space::Enter
-#IfWinActive
 
 ;; always-on-top window snips
-CapsLock & LButton::SCW_ScreenClip2Win(0)
+CapsLock & LButton::SCW_ScreenClip2Win(1)
 
 #IfWinActive ScreenClippingWindow ahk_class AutoHotkeyGUI
 CapsLock::
@@ -178,32 +185,75 @@ Esc::WinClose, ScreenClippingWindow ahk_class AutoHotkeyGUI ;; close active snip
     }
 Return
 
-;; warframe - zenurik energizing dash
+;; warframe - zenurik energizing dash (z : crouch)
 #IfWinActive Warframe
     CapsLock & MButton::
-        ;; operator form
         Send {Numpad5}
         Sleep 275
-        ;; void dash
-        ;; crouch key
         Send {z down}
         Sleep 275
-        ;; jump key
         Send {Space}
         Sleep 275
-        ;; release crouch key
         Send {z up}
         Sleep 275
-        ;; back to warframe
         Send {Numpad5}
-        ;; wait a moment then scroll to first ability
-        ;; this is a personal preference thing
-        ;; feel free to comment out or delete
         Sleep 750
         Send {WheelDown}
     return
 #If
 
+;; auto-reload script on save
+#IfWinActive ahk_group SCRIPT_EDIT
+~^s::
+    sleep 1000
+    ReloadScript()
+return
+#IfWinActive
+
+;; use Space as Enter in ueli
+#IfWinActive ueli
+Space::Enter
+#IfWinActive
+
+;; sticky note hotkeys
+#If WinActive("hwndNotes")
+Esc::
+CapsLock::WinClose hwndNotes
+^s::
+    ControlGetText NotesEdit
+    FileDelete %A_ScriptDir%\notes.txt
+    FileAppend %NotesEdit%, %A_ScriptDir%\notes.txt
+    WinClose hwndNotes
+    Notify().Toast(" notes file saved ", {Time:3000})
+return
+#If
+
+#If MouseIsOver("hwndNotes")
+CapsLock & MButton::WinClose hwndNotes
+#If
+
+;; adjust volume via mousewheel over tray/taskbar
+#If MouseIsOver("ahk_class Shell_TrayWnd")
+    MButton::Send {Volume_Mute}
+    WheelUp::Send {Volume_Up 5}
+    WheelDown::Send {Volume_Down 5}
+#If
+
+GuiSize:
+	AutoXYWH("wh", "NotesEdit")
+return
+
+;;                                /######  /##
+;;                               /##__  ##|__/
+;;  /#######  /######  /####### | ##  \__/ /##  /######
+;; /##_____/ /##__  ##| ##__  ##| ####    | ## /##__  ##
+;;| ##      | ##  \ ##| ##  \ ##| ##_/    | ##| ##  \ ##
+;;| ##      | ##  | ##| ##  | ##| ##      | ##| ##  | ##
+;;|  #######|  ######/| ##  | ##| ##      | ##|  #######
+;; \_______/ \______/ |__/  |__/|__/      |__/ \____  ##
+;;                                             /##  \ ##
+;;                                            |  ######/
+;;                                             \______/
 /*
 [config]
 reloading=0

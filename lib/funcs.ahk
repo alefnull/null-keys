@@ -30,6 +30,19 @@ ReloadScript()
     Reload
 }
 
+ClickDrag()
+{
+    if (GetKeyState("RButton", "P"))
+    {
+        MouseGetPos,,, win_id
+        WinGetTitle, win_title, ahk_id %win_id%
+        if (win_title = "hwndNotes") {
+            PostMessage, 0x0A1, 2,,, ahk_id %win_id%
+            return 1
+        }
+    }
+}
+
 GuiDestroyAll()
 {
     dhw_setting := A_DetectHiddenWindows
@@ -139,13 +152,6 @@ Firefox()
 {
     win_title = Mozilla Firefox ahk_class MozillaWindowClass
     target_exe = "C:\Program Files\Mozilla Firefox\firefox.exe"
-    Swapp(win_title, target_exe)
-}
-
-Notepad()
-{
-    win_title = Notepad ahk_class Notepad
-    target_exe = "C:\Windows\notepad.exe"
     Swapp(win_title, target_exe)
 }
 
