@@ -139,8 +139,15 @@ CapsLock & Right::Send ^#{Right}
 
 ;; empty recycle bin
 CapsLock & Del::
+    DriveGet drives, List, Fixed
+    Loop, Parse, drives
+	{
+		SHQueryRecycleBin(A_LoopField ":\", bin_size, bin_items)
+		total_size += bin_size
+		total_items += bin_items
+	}
     FileRecycleEmpty
-    Notify().Toast(" recycle bin emptied ", {Time:3000})
+    Notify().Toast(" recycle bin emptied: " . total_items . " items, " . StrFormatByteSize(total_size), {Time:3000})
 return
 
 ;; edit this script in default editor
