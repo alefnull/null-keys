@@ -43,6 +43,67 @@ ClickDrag()
     }
 }
 
+;WinMove()
+;{
+    ;GuiGetPos(gui_x, gui_y, gui_w, gui_h)
+;}
+
+;GuiGetPos( ByRef gui_x, ByRef gui_y, ByRef gui_w, ByRef gui_h ) {
+	;Gui hwndNotes:+LastFoundExist
+	;IfWinExist
+	;{
+		;WinGetPos gui_x, gui_y
+		;VarSetCapacity( rect, 16, 0 )
+		;DllCall("GetClientRect", uint, gui_hwnd := WinExist(), uint, &rect )
+		;gui_w := NumGet( rect, 8, "int" )
+		;gui_h := NumGet( rect, 12, "int" )
+	;}
+;}
+
+;GuiGetX(ByRef gui_id=1)
+;{
+    ;Gui %gui_id%:+LastFoundExist
+    ;if (WinExist(gui_id))
+    ;{
+        ;WinGetPos gui_x
+        ;return gui_x
+    ;}
+;}
+
+;GuiGetY(ByRef gui_id=1)
+;{
+    ;Gui %gui_id%:+LastFoundExist
+    ;if (WinExist(gui_id))
+    ;{
+        ;WinGetPos ,,gui_y
+        ;return gui_y
+    ;}
+;}
+
+;GuiGetW(ByRef gui_id=1)
+;{
+    ;Gui %gui_id%:+LastFoundExist
+    ;if (WinExist(gui_id))
+    ;{
+        ;VarSetCapacity(rect, 16, 0)
+		;DllCall("GetClientRect", uint, gui_hwnd := WinExist(), uint, &rect)
+		;gui_w := NumGet(rect, 8, "int")
+        ;return gui_w
+    ;}
+;}
+
+;GuiGetH(ByRef gui_id=1)
+;{
+    ;Gui %gui_id%:+LastFoundExist
+    ;if (WinExist(gui_id))
+    ;{
+        ;VarSetCapacity(rect, 16, 0)
+		;DllCall("GetClientRect", uint, gui_hwnd := WinExist(), uint, &rect)
+		;gui_h := NumGet(rect, 12, "int")
+        ;return gui_h
+    ;}
+;}
+
 GuiDestroyAll()
 {
     dhw_setting := A_DetectHiddenWindows
@@ -55,6 +116,21 @@ GuiDestroyAll()
     }
     DetectHiddenWindows, %dhw_setting%
     return gui_list
+}
+
+SHQueryRecycleBin(RootPath, ByRef Size, ByRef NumItems) {
+    VarSetCapacity(SHQueryRBInfo, 20, 0)
+    NumPut(20, SHQueryRBInfo, 0, "UInt")
+    HR := DllCall("Shell32.dll\SHQueryRecycleBin", "Str", RootPath, (A_PtrSize = 8 ? "Ptr" : "UInt"), &SHQueryRBInfo, "UInt")
+    Size := NumGet(SHQueryRBInfo, (A_PtrSize = 8 ? 8 : 4), "Int64")
+    NumItems := NumGet(SHQueryRBInfo, (A_PtrSize = 8 ? 16 : 12), "Int64")
+    return HR
+}
+
+StrFormatByteSize(ByteSize) {
+    VarSetCapacity(SizeFormat, 32)
+    DllCall("Shlwapi.dll\StrFormatByteSize64A", "Int64", ByteSize, "UInt", &ByteSize, "UInt", 32, "Str")
+    return StrGet(&ByteSize, "CP0")
 }
 
 TeaTimer(mins)
