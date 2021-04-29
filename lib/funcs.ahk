@@ -60,50 +60,6 @@ ClickDrag()
 	;}
 ;}
 
-;GuiGetX(ByRef gui_id=1)
-;{
-    ;Gui %gui_id%:+LastFoundExist
-    ;if (WinExist(gui_id))
-    ;{
-        ;WinGetPos gui_x
-        ;return gui_x
-    ;}
-;}
-
-;GuiGetY(ByRef gui_id=1)
-;{
-    ;Gui %gui_id%:+LastFoundExist
-    ;if (WinExist(gui_id))
-    ;{
-        ;WinGetPos ,,gui_y
-        ;return gui_y
-    ;}
-;}
-
-;GuiGetW(ByRef gui_id=1)
-;{
-    ;Gui %gui_id%:+LastFoundExist
-    ;if (WinExist(gui_id))
-    ;{
-        ;VarSetCapacity(rect, 16, 0)
-		;DllCall("GetClientRect", uint, gui_hwnd := WinExist(), uint, &rect)
-		;gui_w := NumGet(rect, 8, "int")
-        ;return gui_w
-    ;}
-;}
-
-;GuiGetH(ByRef gui_id=1)
-;{
-    ;Gui %gui_id%:+LastFoundExist
-    ;if (WinExist(gui_id))
-    ;{
-        ;VarSetCapacity(rect, 16, 0)
-		;DllCall("GetClientRect", uint, gui_hwnd := WinExist(), uint, &rect)
-		;gui_h := NumGet(rect, 12, "int")
-        ;return gui_h
-    ;}
-;}
-
 GuiDestroyAll()
 {
     dhw_setting := A_DetectHiddenWindows
