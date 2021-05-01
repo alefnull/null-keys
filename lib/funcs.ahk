@@ -1,4 +1,6 @@
-﻿CheckConfig()
+﻿
+
+CheckConfig()
 {
     FileRead, this_script, %A_ScriptFullPath%
     found := InStr(this_script, "[config]")
@@ -72,6 +74,13 @@ GuiDestroyAll()
     }
     DetectHiddenWindows, %dhw_setting%
     return gui_list
+}
+
+DesktopIcons(Show:=-1, hWnd:=0) {                    ; By SKAN on D35D @ tiny.cc/desktopicons
+    If ! hWnd := DllCall("GetWindow", "Ptr",WinExist("ahk_class Progman"), "UInt",5, "Ptr")
+        hWnd := DllCall("GetWindow", "Ptr",WinExist("ahk_class WorkerW"), "UInt",5, "Ptr")
+    If DllCall("IsWindowVisible", "Ptr",DllCall("GetWindow","Ptr",hWnd, "UInt",5, "Ptr")) != Show
+        DllCall("SendMessage","Ptr",hWnd, "Ptr",0x111, "Ptr",0x7402, "Ptr",0)
 }
 
 SHQueryRecycleBin(RootPath, ByRef Size, ByRef NumItems) {

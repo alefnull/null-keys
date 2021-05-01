@@ -118,8 +118,16 @@ CapsLock & \::Clip("(ノ●_●)ノ︵┻━┻") ;; table flip (ノ●_●)ノ�
 ;; snap active window to FancyZones zone
 CapsLock & w::Send #{Right}
 
-;; window spy
+;; toggle desktop icons
 CapsLock & i::
+    dhw := A_DetectHiddenWindows
+    DetectHiddenWindows Off
+    DesktopIcons()
+    DetectHiddenWindows % dhw
+Return
+
+;; window spy
+CapsLock & p::
     Run "C:\Program Files\AutoHotkey\WindowSpy.ahk"
     WinActivate Window Spy
 Return
@@ -161,7 +169,7 @@ CapsLock & r::
 return
 
 ;; sticky notes show/hide
-CapsLock & p::
+CapsLock & n::
     if !(WinActive("hwndNotes"))
     {
         Gui Show, x1425 y5 w480 h320, hwndNotes
