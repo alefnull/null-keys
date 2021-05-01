@@ -61,8 +61,8 @@ OnMessage(0x201, "ClickDrag")
 #Include lib/Gdip_All.ahk
 #Include lib/Notify.ahk
 #Include lib/Clip.ahk
-#Include lib/window-snip.ahk
-#Include lib/funcs.ahk
+#Include lib/WindowSnip.ahk
+#Include funcs.ahk
 
 ResetConfig()
 Notify().Toast(" null-keys loaded ", {Time:3000})
