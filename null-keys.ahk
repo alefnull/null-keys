@@ -47,9 +47,9 @@ SetNumLockState AlwaysOn
 SetCapsLockState AlwaysOff
 SetScrollLockState AlwaysOff
 
-Gui +AlwaysOnTop -Caption +LastFound +OwnDialogs +Resize +ToolWindow +MinSize320x240 +MaxSize640x480 +HwndhwndNotes
+Gui +AlwaysOnTop -Caption +Resize +LastFound +ToolWindow +HwndhwndNotes
 Gui Font, s14 w1, CaskaydiaCove NF
-Gui Add, Edit, vNotesEdit x0 y0 w320 h240
+Gui Add, Edit, vNotesEdit x0 y0 w480 h320
 if (FileExist(A_ScriptDir "\notes.txt"))
 {
     FileRead notes_content, %A_ScriptDir%\notes.txt
@@ -164,7 +164,7 @@ return
 CapsLock & p::
     if !(WinActive("hwndNotes"))
     {
-        Gui Show, w320 h240, hwndNotes
+        Gui Show, x1425 y5 w480 h320, hwndNotes
         GuiControl Focus, NotesEdit
         Send ^{End}
         return
@@ -228,7 +228,6 @@ Return
         ControlGetText NotesEdit
         FileDelete %A_ScriptDir%\notes.txt
         FileAppend %NotesEdit%, %A_ScriptDir%\notes.txt
-        WinClose hwndNotes
         Notify().Toast(" notes file saved ", {Time:3000})
     return
     ^l::
