@@ -39,7 +39,7 @@ if ((A_PtrSize = 8 && A_IsCompiled = "") || !A_IsUnicode)
 
 icon = null-keys.ico
 IfExist, %icon%
-Menu, Tray, Icon, %icon%
+    Menu, Tray, Icon, %icon%
 
 GroupAdd SCRIPT_EDIT, %A_ScriptName%
 
@@ -68,7 +68,6 @@ ResetConfig()
 Notify().Toast(" null-keys loaded ", {Time:3000})
 ;; end auto-exec
 return
-
 
 ;; /##                   /##     /##
 ;;| ##                  | ##    | ##
@@ -149,13 +148,13 @@ CapsLock & Right::Send ^#{Right}
 CapsLock & Del::
     DriveGet drives, List, Fixed
     Loop, Parse, drives
-	{
-		SHQueryRecycleBin(A_LoopField ":\", bin_size, bin_items)
-		total_size += bin_size
-		total_items += bin_items
-	}
+    {
+        SHQueryRecycleBin(A_LoopField ":\", bin_size, bin_items)
+        total_size += bin_size
+        total_items += bin_items
+    }
     FileRecycleEmpty
-    Notify().Toast(" recycle bin emptied: " . total_items . " items, " . StrFormatByteSize(total_size), {Time:3000})
+    Notify().Toast(" recycle bin emptied: " . total_items . " items, " . FormatByteSize(total_size), {Time:3000})
 return
 
 ;; edit this script in default editor
@@ -184,15 +183,15 @@ return
 CapsLock & LButton::SCW_ScreenClip2Win(1)
 
 #IfWinActive ScreenClippingWindow ahk_class AutoHotkeyGUI
-    CapsLock::
+CapsLock::
     Esc::WinClose, ScreenClippingWindow ahk_class AutoHotkeyGUI ;; close active snip
     ^s::SCW_Win2File(0) ;; save active snip to 'shots' folder in A_ScriptDir
     ^c::SCW_Win2Clipboard(0) ;; copy to clipboard w/o border
 #IfWinActive
 
 ~LButton:: ;; double click any snip to close
-	MouseGetPos,,, win_id
-	WinGetTitle, win_title, ahk_id %win_id%
+    MouseGetPos,,, win_id
+    WinGetTitle, win_title, ahk_id %win_id%
     if (win_title = "ScreenClippingWindow")
     {
         If (A_PriorHotKey = A_ThisHotKey and A_TimeSincePriorHotkey < 200)
@@ -202,27 +201,27 @@ Return
 
 ;; warframe - zenurik energizing dash (z : crouch)
 #IfWinActive Warframe
-    CapsLock & MButton::
-        Send {Numpad5}
-        Sleep 275
-        Send {z down}
-        Sleep 275
-        Send {Space}
-        Sleep 275
-        Send {z up}
-        Sleep 275
-        Send {Numpad5}
-        Sleep 750
-        Send {WheelDown}
-    return
+CapsLock & MButton::
+    Send {Numpad5}
+    Sleep 275
+    Send {z down}
+    Sleep 275
+    Send {Space}
+    Sleep 275
+    Send {z up}
+    Sleep 275
+    Send {Numpad5}
+    Sleep 750
+    Send {WheelDown}
+return
 #If
 
 ;; auto-reload script on save
 #IfWinActive ahk_group SCRIPT_EDIT
-    ~^s::
-        sleep 1000
-        ReloadScript()
-    return
+~^s::
+    sleep 1000
+    ReloadScript()
+return
 #IfWinActive
 
 ;; use Space as Enter in ueli
@@ -232,35 +231,35 @@ Return
 
 ;; sticky note hotkeys
 #If WinActive("hwndNotes")
-    ^s::
-        ControlGetText NotesEdit
-        FileDelete %A_ScriptDir%\notes.txt
-        FileAppend %NotesEdit%, %A_ScriptDir%\notes.txt
-        Notify().Toast(" notes file saved ", {Time:3000})
-    return
-    ^l::
-        if (FileExist(A_ScriptDir "\notes.txt"))
-        {
-            FileRead notes_content, %A_ScriptDir%\notes.txt
-            GuiControl,, NotesEdit, %notes_content%
-            Send ^{End}
-        }
-    return
+^s::
+ControlGetText NotesEdit
+FileDelete %A_ScriptDir%\notes.txt
+FileAppend %NotesEdit%, %A_ScriptDir%\notes.txt
+Notify().Toast(" notes file saved ", {Time:3000})
+return
+^l::
+    if (FileExist(A_ScriptDir "\notes.txt"))
+    {
+        FileRead notes_content, %A_ScriptDir%\notes.txt
+        GuiControl,, NotesEdit, %notes_content%
+        Send ^{End}
+    }
+return
 #If
 
 #If MouseIsOver("hwndNotes")
-    MButton::Gui Hide
+MButton::Gui Hide
 #If
 
 ;; adjust volume via mousewheel over tray/taskbar
 #If MouseIsOver("ahk_class Shell_TrayWnd")
     MButton::Send {Volume_Mute}
-    WheelUp::Send {Volume_Up 5}
-    WheelDown::Send {Volume_Down 5}
+WheelUp::Send {Volume_Up 5}
+WheelDown::Send {Volume_Down 5}
 #If
 
 GuiSize:
-	AutoXYWH("wh", "NotesEdit")
+    AutoXYWH("wh", "NotesEdit")
 return
 
 ;;                                /######  /##

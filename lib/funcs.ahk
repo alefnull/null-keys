@@ -1,6 +1,4 @@
-﻿
-
-CheckConfig()
+﻿CheckConfig()
 {
     FileRead, this_script, %A_ScriptFullPath%
     found := InStr(this_script, "[config]")
@@ -45,23 +43,6 @@ ClickDrag()
     }
 }
 
-;WinMove()
-;{
-    ;GuiGetPos(gui_x, gui_y, gui_w, gui_h)
-;}
-
-;GuiGetPos( ByRef gui_x, ByRef gui_y, ByRef gui_w, ByRef gui_h ) {
-	;Gui hwndNotes:+LastFoundExist
-	;IfWinExist
-	;{
-		;WinGetPos gui_x, gui_y
-		;VarSetCapacity( rect, 16, 0 )
-		;DllCall("GetClientRect", uint, gui_hwnd := WinExist(), uint, &rect )
-		;gui_w := NumGet( rect, 8, "int" )
-		;gui_h := NumGet( rect, 12, "int" )
-	;}
-;}
-
 GuiDestroyAll()
 {
     dhw_setting := A_DetectHiddenWindows
@@ -76,14 +57,16 @@ GuiDestroyAll()
     return gui_list
 }
 
-DesktopIcons(Show:=-1, hWnd:=0) {                    ; By SKAN on D35D @ tiny.cc/desktopicons
+DesktopIcons(Show:=-1, hWnd:=0)
+{ ; By SKAN on D35D @ tiny.cc/desktopicons
     If ! hWnd := DllCall("GetWindow", "Ptr",WinExist("ahk_class Progman"), "UInt",5, "Ptr")
         hWnd := DllCall("GetWindow", "Ptr",WinExist("ahk_class WorkerW"), "UInt",5, "Ptr")
     If DllCall("IsWindowVisible", "Ptr",DllCall("GetWindow","Ptr",hWnd, "UInt",5, "Ptr")) != Show
         DllCall("SendMessage","Ptr",hWnd, "Ptr",0x111, "Ptr",0x7402, "Ptr",0)
 }
 
-SHQueryRecycleBin(RootPath, ByRef Size, ByRef NumItems) {
+SHQueryRecycleBin(RootPath, ByRef Size, ByRef NumItems)
+{
     VarSetCapacity(SHQueryRBInfo, 20, 0)
     NumPut(20, SHQueryRBInfo, 0, "UInt")
     HR := DllCall("Shell32.dll\SHQueryRecycleBin", "Str", RootPath, (A_PtrSize = 8 ? "Ptr" : "UInt"), &SHQueryRBInfo, "UInt")
@@ -92,10 +75,17 @@ SHQueryRecycleBin(RootPath, ByRef Size, ByRef NumItems) {
     return HR
 }
 
-StrFormatByteSize(ByteSize) {
-    VarSetCapacity(SizeFormat, 32)
-    DllCall("Shlwapi.dll\StrFormatByteSize64A", "Int64", ByteSize, "UInt", &ByteSize, "UInt", 32, "Str")
-    return StrGet(&ByteSize, "CP0")
+FormatByteSize(Bytes)
+{
+    static size:="bytes,KB,MB,GB,TB,PB,EB,ZB,YB"
+    Loop,Parse,size,`,
+        If (bytes>999)
+        bytes:=bytes/1024
+    else {
+        bytes:=Trim(SubStr(bytes,1,4),".") " " A_LoopField
+        break
+    }
+    return bytes
 }
 
 TeaTimer(mins)
@@ -114,28 +104,14 @@ TeaTimer(mins)
         Gui Color, FFFFFF
         While (A_TickCount <= end_tick)
         {
-            is_canceled := ReadConfig("canceled")
-            if (is_canceled = 1)
-            {
-                WriteConfig("brewing", 0)
-                WriteConfig("canceled", 0)
-                GuiDestroyAll()
-                Notify().Toast(" why would you cancel a tea timer? ",{Color:"0xFF44FF", Time:3000})
-                Goto break_outer
-            }
             width := A_ScreenWidth * (1 - (end_tick - A_TickCount)/millis)
             Gui, Show, x0 y0 w%width% h15 NA
             Sleep 20
         }
         Gui Destroy
-        WriteConfig("brewing", 0)
         Notify().Toast(" your tea is (probably) ready ",{Color:"0xFF44FF", Time:3000})
+        WriteConfig("brewing", 0)
     }
-    else
-    {
-        WriteConfig("canceled", 1)
-    }
-    break_outer:
 }
 
 MouseIsOver(win_title)
