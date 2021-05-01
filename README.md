@@ -2,9 +2,7 @@
 
 null-keys is a small cache of AutoHotkey scripts i've either written or collected, and compiled into a personal "universal" script that provides useful conveniences, or just some fun functionality.
 
-## Installation / Usage
-
-clone or download the repo, and launch null-keys.ahk
+![Twitter Follow](https://img.shields.io/twitter/follow/alefnull?color=%2300A6FF&label=%40alefnull&logo=twitter&style=for-the-badge)
 
 ## Features
 
