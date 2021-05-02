@@ -2,7 +2,7 @@
 
 null-keys is a small cache of AutoHotkey scripts i've either written or collected, and compiled into a personal "universal" script that provides useful conveniences, or just some fun functionality.
 
-![Twitter Follow](https://img.shields.io/twitter/follow/alefnull?color=%2300A6FF&label=%40alefnull&logo=twitter&style=for-the-badge)
+[![Twitter Follow](https://img.shields.io/twitter/follow/alefnull?color=%2300AAFF&label=%40alefnull&logo=twitter&logoColor=%2300AAFF&style=for-the-badge)](https://twitter.com/alefnull?ref_src=twsrc%5Etfw)
 
 ## Features
 
