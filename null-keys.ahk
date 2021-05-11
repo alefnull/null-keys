@@ -18,6 +18,7 @@ FileEncoding UTF-8
 SetTitleMatchMode 2
 ListLines Off
 #KeyHistory 20
+Menu, tray, Tip, null-keys is running
 
 if not A_IsAdmin
 {
@@ -47,13 +48,13 @@ SetNumLockState AlwaysOn
 SetCapsLockState AlwaysOff
 SetScrollLockState AlwaysOff
 
-Gui +AlwaysOnTop -Caption +Resize +LastFound +ToolWindow +HwndhwndNotes
-Gui Font, s14 w1, CaskaydiaCove NF
-Gui Add, Edit, vNotesEdit x0 y0 w480 h320
+#Include funcs.ahk
+Gui hwndNotes:-Caption +Resize +LastFound +ToolWindow +HwndhwndNotes
+Gui hwndNotes:Font, s14 w1, CaskaydiaCove NF
+Gui hwndNotes:Add, Edit, vNotesEdit x0 y0 w640 h480
 if (FileExist(A_ScriptDir "\notes.txt"))
 {
-    FileRead notes_content, %A_ScriptDir%\notes.txt
-    GuiControl,, NotesEdit, %notes_content%
+    LoadNotes()
 }
 OnMessage(0x201, "ClickDrag")
 
@@ -62,7 +63,6 @@ OnMessage(0x201, "ClickDrag")
 #Include lib/Notify.ahk
 #Include lib/Clip.ahk
 #Include lib/WindowSnip.ahk
-#Include funcs.ahk
 
 ResetConfig()
 Notify().Toast(" null-keys loaded ", {Time:3000})
@@ -164,6 +164,8 @@ return
 
 ;; reload script
 CapsLock & r::
+    SaveNotes()
+    sleep 100
     ReloadScript()
 return
 
@@ -171,12 +173,12 @@ return
 CapsLock & n::
     if !(WinActive("hwndNotes"))
     {
-        Gui Show, x1425 y5 w480 h320, hwndNotes
+        Gui hwndNotes:Show, w640 h480, hwndNotes
         GuiControl Focus, NotesEdit
         Send ^{End}
         return
     }
-    Gui Hide
+    Gui hwndNotes:Hide
 return
 
 ;; always-on-top window snips
@@ -232,18 +234,13 @@ return
 ;; sticky note hotkeys
 #If WinActive("hwndNotes")
 ^s::
-ControlGetText NotesEdit
-FileDelete %A_ScriptDir%\notes.txt
-FileAppend %NotesEdit%, %A_ScriptDir%\notes.txt
-Notify().Toast(" notes file saved ", {Time:3000})
+    SaveNotes()
+    Notify().Toast(" notes file loaded ", {Time:3000})
 return
 ^l::
-    if (FileExist(A_ScriptDir "\notes.txt"))
-    {
-        FileRead notes_content, %A_ScriptDir%\notes.txt
-        GuiControl,, NotesEdit, %notes_content%
-        Send ^{End}
-    }
+    LoadNotes()
+    Send #{Right}
+    Notify().Toast(" notes file loaded ", {Time:3000})
 return
 #If
 
@@ -277,5 +274,4 @@ return
 [config]
 reloading=0
 brewing=0
-canceled=0
 */

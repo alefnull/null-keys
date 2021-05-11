@@ -20,7 +20,6 @@ ResetConfig()
 {
     IniWrite 0, %A_ScriptFullPath%, config, reloading
     IniWrite 0, %A_ScriptFullPath%, config, brewing
-    IniWrite 0, %A_ScriptFullPath%, config, canceled
 }
 
 ReloadScript()
@@ -28,6 +27,19 @@ ReloadScript()
     WriteConfig("reloading", true)
     Sleep 750
     Reload
+}
+
+SaveNotes()
+{
+    ControlGetText NotesEdit
+    FileDelete %A_ScriptDir%\notes.txt
+    FileAppend %NotesEdit%, %A_ScriptDir%\notes.txt
+}
+
+LoadNotes()
+{
+    FileRead notes_content, %A_ScriptDir%\notes.txt
+    GuiControl hwndNotes:, NotesEdit, %notes_content%
 }
 
 ClickDrag()
@@ -140,7 +152,9 @@ Swapp(win_title, target_exe)
     {
         if (target_exe = wt.exe)
         {
-            Run *RunAs wt.exe
+            Run *RunAs %target_exe%
+            WinWait %win_title%
+            WinActivate
         }
         else
         {
