@@ -172,6 +172,13 @@ Discord()
     Swapp(win_title, target_exe)
 }
 
+Firefox()
+{
+    win_title = Mozilla Firefox ahk_class MozillaWindowClass
+    target_exe = "C:\Program Files\Mozilla Firefox\firefox.exe"
+    Swapp(win_title, target_exe)
+}
+
 Guilded()
 {
     win_title = Guilded ahk_class Chrome_WidgetWin_1
@@ -179,10 +186,10 @@ Guilded()
     Swapp(win_title, target_exe)
 }
 
-Firefox()
+Processing()
 {
-    win_title = Mozilla Firefox ahk_class MozillaWindowClass
-    target_exe = "C:\Program Files\Mozilla Firefox\firefox.exe"
+    win_title = Processing ahk_class SunAwtFrame
+    target_exe = "C:\Program Files\ProcessingORG\processing.exe"
     Swapp(win_title, target_exe)
 }
 

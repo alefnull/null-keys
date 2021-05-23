@@ -104,8 +104,9 @@ Return
 
 ;; launch or switch to apps (funcs.ahk)
 CapsLock & d::Discord()
-CapsLock & f::Firefox()
 CapsLock & g::Guilded()
+CapsLock & f::Firefox()
+CapsLock & p::Processing()
 CapsLock & t::Terminal()
 
 ;; emoji/emotes
@@ -115,7 +116,7 @@ CapsLock & ]::Clip("(●_◉)") ;; face raised eyebrow (●_◉)
 CapsLock & \::Clip("(ノ●_●)ノ︵┻━┻") ;; table flip (ノ●_●)ノ︵┻━┻
 
 ;; snap active window to FancyZones zone
-CapsLock & w::Send #{Right}
+CapsLock & w::Send #{Up}
 
 ;; toggle desktop icons
 CapsLock & i::
@@ -126,7 +127,7 @@ CapsLock & i::
 Return
 
 ;; window spy
-CapsLock & p::
+CapsLock & s::
     Run "C:\Program Files\AutoHotkey\WindowSpy.ahk"
     WinActivate Window Spy
 Return
@@ -187,7 +188,7 @@ CapsLock & LButton::SCW_ScreenClip2Win(1)
 #IfWinActive ScreenClippingWindow ahk_class AutoHotkeyGUI
 CapsLock::
     Esc::WinClose, ScreenClippingWindow ahk_class AutoHotkeyGUI ;; close active snip
-    ^s::SCW_Win2File(0) ;; save active snip to 'shots' folder in A_ScriptDir
+    ^s::SCW_Win2File(0) ;; save active snip to 'snips' folder in A_ScriptDir
     ^c::SCW_Win2Clipboard(0) ;; copy to clipboard w/o border
 #IfWinActive
 
