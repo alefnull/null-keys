@@ -104,7 +104,6 @@ Return
 
 ;; launch or switch to apps (funcs.ahk)
 CapsLock & d::Discord()
-CapsLock & g::Guilded()
 CapsLock & f::Firefox()
 CapsLock & p::Processing()
 CapsLock & t::Terminal()

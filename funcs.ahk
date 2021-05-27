@@ -179,13 +179,6 @@ Firefox()
     Swapp(win_title, target_exe)
 }
 
-Guilded()
-{
-    win_title = Guilded ahk_class Chrome_WidgetWin_1
-    target_exe = "C:\Users\alefnull\AppData\Local\Programs\Guilded\Guilded.exe"
-    Swapp(win_title, target_exe)
-}
-
 Processing()
 {
     win_title = Processing ahk_class SunAwtFrame
