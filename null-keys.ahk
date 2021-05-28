@@ -187,7 +187,11 @@ CapsLock & LButton::SCW_ScreenClip2Win(1)
 #IfWinActive ScreenClippingWindow ahk_class AutoHotkeyGUI
 CapsLock::
     Esc::WinClose, ScreenClippingWindow ahk_class AutoHotkeyGUI ;; close active snip
-    ^s::SCW_Win2File(0) ;; save active snip to 'snips' folder in A_ScriptDir
+    ^s::
+        SCW_Win2File(0) ;; save active snip to 'snips' folder in A_ScriptDir
+        WinClose, ScreenClippingWindow ahk_class AutoHotkeyGUI
+        Notify().Toast(" snip saved ", {Time:3000})
+        return
     ^c::SCW_Win2Clipboard(0) ;; copy to clipboard w/o border
 #IfWinActive
 
