@@ -105,7 +105,6 @@ Return
 ;; launch or switch to apps (funcs.ahk)
 CapsLock & d::Discord()
 CapsLock & f::Firefox()
-CapsLock & p::Processing()
 CapsLock & t::Terminal()
 
 ;; emoji/emotes
@@ -239,7 +238,7 @@ return
 #If WinActive("hwndNotes")
 ^s::
     SaveNotes()
-    Notify().Toast(" notes file loaded ", {Time:3000})
+    Notify().Toast(" notes file saved ", {Time:3000})
 return
 ^l::
     LoadNotes()

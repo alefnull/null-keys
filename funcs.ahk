@@ -179,13 +179,6 @@ Firefox()
     Swapp(win_title, target_exe)
 }
 
-Processing()
-{
-    win_title = Processing ahk_class SunAwtFrame
-    target_exe = "C:\Program Files\ProcessingORG\processing.exe"
-    Swapp(win_title, target_exe)
-}
-
 Terminal()
 {
     win_title = ahk_exe WindowsTerminal.exe ahk_class CASCADIA_HOSTING_WINDOW_CLASS
