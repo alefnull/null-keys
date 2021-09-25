@@ -12,7 +12,7 @@ null-keys is a small cache of AutoHotkey scripts i've either written or collecte
   - CapsLock + R = reload script
   - CapsLock + D/F/G/T = launch or switch to apps (see funcs.ahk)
   - CapsLock + (select area with mouse) = take screenshot (ctrl+s to save, double-click to close)
-  - CapsLock + P = always-on-top, borderless sticky note (ctrl+s to save, ctrl+l to reload, MButton to close)
+  - CapsLock + N = always-on-top, borderless sticky note (ctrl+s to save, ctrl+l to reload, MButton to close)
   - CapsLock + Enter = task manager
   - CapsLock + Del = empty recycle bin
   - ...and more
