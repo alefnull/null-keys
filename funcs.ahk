@@ -100,45 +100,34 @@ FormatByteSize(Bytes)
     return bytes
 }
 
-TeaTimer(mins)
-{
-    total_seconds := mins * 60
-    millis := total_seconds * 1000
-    end_tick := A_TickCount + millis
-    is_brewing := ReadConfig("brewing")
-    if (is_brewing = 0)
-    {
-        WriteConfig("brewing", 1)
-        Notify().Toast(" starting tea timer: " . mins . " min ",{Color:"0xFF44FF", Time:3000})
-        Gui New,hwndTeaTimer
-        Gui +E0x20 -Caption +AlwaysOnTop +Owner +LastFound
-        WinSet Transparent, 150
-        Gui Color, FFFFFF
-        While (A_TickCount <= end_tick)
-        {
-            width := A_ScreenWidth * (1 - (end_tick - A_TickCount)/millis)
-            Gui, Show, x0 y0 w%width% h15 NA
-            Sleep 20
-        }
-        Gui Destroy
-        Notify().Toast(" your tea is (probably) ready ",{Color:"0xFF44FF", Time:3000})
-        WriteConfig("brewing", 0)
-    }
-}
-
 MouseIsOver(win_title)
 {
     MouseGetPos ,,,win
     return WinExist(win_title . " ahk_id " . win)
 }
 
-Swapp(win_title, target_exe)
+Swapp(win_title, target_exe, args:="")
 {
     if WinExist(win_title)
     {
         if WinActive(win_title)
         {
-            WinMinimize
+            if InStr(args, "Ubuntu")
+            {
+                Send ^+1
+            }
+            else if InStr(args, "Arch")
+            {
+                Send ^+4
+            }
+            else if InStr(args, "Command")
+            {
+                Send ^+2
+            }
+            else
+            {
+                WinMinimize
+            }
         }
         else
         {
@@ -146,13 +135,28 @@ Swapp(win_title, target_exe)
             Sleep 100
             DllCall("SetForegroundWindow", UInt, win_id)
             DllCall("SwitchToThisWindow", "UInt", win_id, "UInt", 1)
+            if InStr(args, "Ubuntu")
+            {
+                Send ^+1
+            }
+            else if InStr(args, "Command")
+            {
+                Send ^+2
+            }
+            else if InStr(args, "Arch")
+            {
+                Send ^+4
+            }
+            Sleep 100
+            DllCall("SetForegroundWindow", UInt, win_id)
+            DllCall("SwitchToThisWindow", "UInt", win_id, "UInt", 1)
         }
     }
     else
     {
-        if (target_exe = wt.exe)
+        if InStr(target_exe, "wt.exe")
         {
-            Run *RunAs %target_exe%
+            Run *RunAs %target_exe% %args%
             WinWait %win_title%
             WinActivate
         }
@@ -162,13 +166,23 @@ Swapp(win_title, target_exe)
             WinWait %win_title%
             WinActivate
         }
+        Sleep 100
+        DllCall("SetForegroundWindow", UInt, win_id)
+        DllCall("SwitchToThisWindow", "UInt", win_id, "UInt", 1)
     }
+}
+
+VSCode()
+{
+    win_title = Visual Studio Code ahk_class Chrome_WidgetWin_1
+    target_exe = "C:\Program Files\Microsoft VS Code\Code.exe"
+    Swapp(win_title, target_exe)
 }
 
 Discord()
 {
     win_title = Discord ahk_class Chrome_WidgetWin_1
-    target_exe = "C:\Users\alefnull\AppData\Local\Discord\app-0.0.309\Discord.exe"
+    target_exe = "C:\Users\alefnull\AppData\Local\Discord\app-1.0.9003\Discord.exe"
     Swapp(win_title, target_exe)
 }
 
@@ -179,9 +193,24 @@ Firefox()
     Swapp(win_title, target_exe)
 }
 
-Terminal()
+Terminal(args:="")
 {
     win_title = ahk_exe WindowsTerminal.exe ahk_class CASCADIA_HOSTING_WINDOW_CLASS
-    target_exe = wt.exe
-    Swapp(win_title, target_exe)
+    target_exe = "wt.exe"
+    if InStr(args, "Ubuntu")
+    {
+        Swapp(win_title, target_exe, args)
+    }
+    else if InStr(args, "Arch")
+    {
+        Swapp(win_title, target_exe, args)
+    }
+    else if InStr(args, "Command")
+    {
+        Swapp(win_title, target_exe, args)
+    }
+    else
+    {
+        Swapp(win_title, target_exe)
+    }
 }

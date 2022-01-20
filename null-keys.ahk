@@ -96,25 +96,32 @@ CapsLock & Backspace::Send {Del} ;; delete
 CapsLock & u::Send ^{z} ;; undo
 CapsLock & y::Send ^{y} ;; redo
 CapsLock & q::
-    if !(WinActive("ahk_class Progman") || WinActive("ahk_class Shell_TrayWnd"))
+    if !(WinActive("ahk_class Progman") || WinActive("ahk_class Shell_TrayWnd") || WinActive("Overwatch"))
     {
-        Send !{F4} ;; quit program if not explorer
+        Send !{F4} ;; quit program if not explorer or overwatch
     }
 Return
 
 ;; launch or switch to apps (funcs.ahk)
+CapsLock & c::VSCode()
 CapsLock & d::Discord()
 CapsLock & f::Firefox()
-CapsLock & t::Terminal()
+CapsLock & t::Terminal("-p Command-Prompt")
+CapsLock & b::Terminal("-p Ubuntu")
+CapsLock & a::Terminal("-p Arch")
 
 ;; emoji/emotes
 CapsLock & /::Clip("¯\_(●_●)_/¯") ;; shrug ¯\_(●_●)_/¯
+CapsLock & ,::Clip("(⌐■_■)") ;; cool dude (⌐■_■)
 CapsLock & [::Clip("(●_●)") ;; face neutral (●_●)
 CapsLock & ]::Clip("(●_◉)") ;; face raised eyebrow (●_◉)
 CapsLock & \::Clip("(ノ●_●)ノ︵┻━┻") ;; table flip (ノ●_●)ノ︵┻━┻
 
 ;; snap active window to FancyZones zone
 CapsLock & w::Send #{Up}
+
+;; generate / set planetary orbit wallpaper
+CapsLock & p::Run wscript.exe "C:\Users\alefnull\source\sketches\generative-py\run-nft-planets.vbs"
 
 ;; toggle desktop icons
 CapsLock & i::
@@ -129,9 +136,6 @@ CapsLock & s::
     Run "C:\Program Files\AutoHotkey\WindowSpy.ahk"
     WinActivate Window Spy
 Return
-
-;; tea timer
-CapsLock & '::TeaTimer(3)
 
 ;; ueli
 CapsLock & Space::Send !{Space}
@@ -261,6 +265,7 @@ WheelDown::Send {Volume_Down 5}
 GuiSize:
     AutoXYWH("wh", "NotesEdit")
 return
+
 
 ;;                                /######  /##
 ;;                               /##__  ##|__/
