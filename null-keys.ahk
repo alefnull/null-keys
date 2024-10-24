@@ -143,8 +143,6 @@ return
 
 ;; reload script
 CapsLock & r::
-    SaveNotes()
-    sleep 100
     ReloadScript()
 return
 
