@@ -19,7 +19,6 @@ WriteConfig(key, value)
 ResetConfig()
 {
     IniWrite 0, %A_ScriptFullPath%, config, reloading
-    IniWrite 0, %A_ScriptFullPath%, config, brewing
 }
 
 ReloadScript()
