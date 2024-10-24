@@ -10,16 +10,11 @@ null-keys is a small cache of AutoHotkey scripts i've either written or collecte
 - also uses CapsLock as new modifier key (see hotkeys.ahk)
   - CapsLock + E = edit script in default editor
   - CapsLock + R = reload script
-  - CapsLock + D/F/G/T = launch or switch to apps (see funcs.ahk)
   - CapsLock + (select area with mouse) = take screenshot (ctrl+s to save, double-click to close)
-  - CapsLock + N = always-on-top, borderless sticky note (ctrl+s to save, ctrl+l to reload, MButton to close)
   - CapsLock + Enter = task manager
   - CapsLock + Del = empty recycle bin
   - ...and more
 - when editing script in any(?) editor, Ctrl+S to save will automagically reload script!
-- mouse wheel over tray/taskbar adjusts system volume
-- tea timer, with notifications and progress bar!
-- Warframe "Zenurik Energizing Dash" script
 - some fun emoticon hotkeys
 - whatever else i decide to toss in
 

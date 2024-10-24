@@ -49,15 +49,6 @@ SetCapsLockState AlwaysOff
 SetScrollLockState AlwaysOff
 
 #Include funcs.ahk
-Gui hwndNotes:-Caption +Resize +LastFound +ToolWindow +HwndhwndNotes
-Gui hwndNotes:Font, s14 w1, CaskaydiaCove NF
-Gui hwndNotes:Add, Edit, vNotesEdit x0 y0 w640 h480
-if (FileExist(A_ScriptDir "\notes.txt"))
-{
-    LoadNotes()
-}
-OnMessage(0x201, "ClickDrag")
-
 ;#Include lib/Neutron.ahk
 #Include lib/Gdip_All.ahk
 #Include lib/Notify.ahk
@@ -102,14 +93,6 @@ CapsLock & q::
     }
 Return
 
-;; launch or switch to apps (funcs.ahk)
-CapsLock & c::VSCode()
-CapsLock & d::Discord()
-CapsLock & f::Firefox()
-CapsLock & t::Terminal("-p Command-Prompt")
-CapsLock & b::Terminal("-p Ubuntu")
-CapsLock & a::Terminal("-p Arch")
-
 ;; emoji/emotes
 CapsLock & /::Clip("¯\_(●_●)_/¯") ;; shrug ¯\_(●_●)_/¯
 CapsLock & ,::Clip("(⌐■_■)") ;; cool dude (⌐■_■)
@@ -119,9 +102,6 @@ CapsLock & \::Clip("(ノ●_●)ノ︵┻━┻") ;; table flip (ノ●_●)ノ�
 
 ;; snap active window to FancyZones zone
 CapsLock & w::Send #{Up}
-
-;; generate / set planetary orbit wallpaper
-CapsLock & p::Run wscript.exe "C:\Users\alefnull\source\sketches\generative-py\run-nft-planets.vbs"
 
 ;; toggle desktop icons
 CapsLock & i::
@@ -137,15 +117,11 @@ CapsLock & s::
     WinActivate Window Spy
 Return
 
-;; ueli
+;; ueli (or any alt-space launcher, like PowerToys Run)
 CapsLock & Space::Send !{Space}
 
 ;; task manager
 CapsLock & Enter::Send +^{Esc}
-
-;; virtual desktop left & right
-CapsLock & Left::Send ^#{Left}
-CapsLock & Right::Send ^#{Right}
 
 ;; empty recycle bin
 CapsLock & Del::
@@ -172,29 +148,17 @@ CapsLock & r::
     ReloadScript()
 return
 
-;; sticky notes show/hide
-CapsLock & n::
-    if !(WinActive("hwndNotes"))
-    {
-        Gui hwndNotes:Show, w640 h480, hwndNotes
-        GuiControl Focus, NotesEdit
-        Send ^{End}
-        return
-    }
-    Gui hwndNotes:Hide
-return
-
 ;; always-on-top window snips
 CapsLock & LButton::SCW_ScreenClip2Win(1)
 
 #IfWinActive ScreenClippingWindow ahk_class AutoHotkeyGUI
-CapsLock::
+    CapsLock::
     Esc::WinClose, ScreenClippingWindow ahk_class AutoHotkeyGUI ;; close active snip
     ^s::
         SCW_Win2File(0) ;; save active snip to 'snips' folder in A_ScriptDir
         WinClose, ScreenClippingWindow ahk_class AutoHotkeyGUI
         Notify().Toast(" snip saved ", {Time:3000})
-        return
+    return
     ^c::SCW_Win2Clipboard(0) ;; copy to clipboard w/o border
 #IfWinActive
 
@@ -208,64 +172,17 @@ CapsLock::
     }
 Return
 
-;; warframe - zenurik energizing dash (z : crouch)
-#IfWinActive Warframe
-CapsLock & MButton::
-    Send {Numpad5}
-    Sleep 275
-    Send {z down}
-    Sleep 275
-    Send {Space}
-    Sleep 275
-    Send {z up}
-    Sleep 275
-    Send {Numpad5}
-    Sleep 750
-    Send {WheelDown}
-return
-#If
-
 ;; auto-reload script on save
 #IfWinActive ahk_group SCRIPT_EDIT
-~^s::
-    sleep 1000
-    ReloadScript()
-return
+    ~^s::
+        sleep 1000
+        ReloadScript()
+    return
 #IfWinActive
-
-;; use Space as Enter in ueli
-#IfWinActive ueli
-    Space::Enter
-#IfWinActive
-
-;; sticky note hotkeys
-#If WinActive("hwndNotes")
-^s::
-    SaveNotes()
-    Notify().Toast(" notes file saved ", {Time:3000})
-return
-^l::
-    LoadNotes()
-    Send #{Right}
-    Notify().Toast(" notes file loaded ", {Time:3000})
-return
-#If
-
-#If MouseIsOver("hwndNotes")
-MButton::Gui Hide
-#If
-
-;; adjust volume via mousewheel over tray/taskbar
-#If MouseIsOver("ahk_class Shell_TrayWnd")
-    MButton::Send {Volume_Mute}
-WheelUp::Send {Volume_Up 5}
-WheelDown::Send {Volume_Down 5}
-#If
 
 GuiSize:
     AutoXYWH("wh", "NotesEdit")
 return
-
 
 ;;                                /######  /##
 ;;                               /##__  ##|__/
